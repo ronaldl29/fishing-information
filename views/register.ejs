@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register - fishingBakersfield</title>
+<% include partials/header %>
+<div class="block">
+      <div class="notification is-info">
+        <p>Registering an account allows you to post your catches and share fishing tips with other anglers!</p>
+      </div>
+</div>
+<div class="container">
+<% include partials/message %>
+<div id="errorCMsg" style="display: none">
+  <article class="message is-warning" id="delete" style="margin-bottom: 1.5rem;">
+    <div class="message-header">
+      <p><i class="fa fa-exclamation-triangle">&nbsp;</i>Error</p>
+      <button class="delete" onclick="hideMsg()" aria-label="delete"></button>
+    </div>
+    <div class="message-body">
+      CAPTCHA must be checked.
+    </div>
+  </article>
+</div>
+    <div class="columns is-centered">
+        <article class="message is-info">
+            <div class="message-header">
+                <p>Register an account:</p>
+            </div>
+            <div class="message-body">
+    <form action="/register" method="POST">
+        <div class="field">
+          <label class="label">Email</label>
+              <div class="control has-icons-left">
+                <input class="input" type="email" style="width: 300px" placeholder="youremail@gmail.com" name="email" maxlength="40" required>
+		<span class="icon is-left">
+		<i class="fa fa-envelope"></i>
+		</span>
+              </div>
+        </div>
+        <div class="field">
+          <label class="label">Desired Username</label>
+              <div class="control has-icons-left">
+                <input class="input" type="text" style="width: 300px" placeholder="Username" name="username" maxlength="15" required>
+		<span class="icon is-left">
+		<i class="fa fa-user"></i>
+		</span>
+              </div>
+        </div>
+        <div class="field">
+          <label class="label">Password</label>
+              <div class="control has-icons-left">
+                <input class="input" type="password" style="width: 300px" placeholder="Password" name="password" maxlength="30" required>
+		<span class="icon is-left">
+		<i class="fa fa-lock"></i>
+		</span>
+              </div>
+        </div>
+	<div class="g-recaptcha" data-sitekey="6Lej8z4UAAAAAFC4JjpXnlYFmzL8Japa_Ao93Oij" name="g-recaptcha-response" id="rcaptcha"></div>
+        <div class="field">
+          <div class="control">
+            <label class="checkbox">
+                <input type="checkbox" checked required>
+                  I agree to the <a href="/terms">terms and conditions.</a>
+            </label>
+          </div>
+        </div>
+        <button onclick="return validateCaptcha()" class="button is-link"><i class="fa fa-user-plus">&nbsp;</i>Register</button>
+    </form>
+    </div>
+    </article>
+</div>
+</div>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script>
+function errorCMsg() {
+    document.getElementById('errorCMsg').style.display = '';
+}
+function validateCaptcha()
+{
+        if(grecaptcha.getResponse() === "")
+        {
+                errorCMsg();
+                return false;
+        }
+        return true;
+}
+</script>
+<% include partials/footer %>

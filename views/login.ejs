@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - fishingBakersfield</title>
+<% include partials/header %>
+<div class="block">
+      <div class="notification is-info">
+        <p>Thanks for returning!</p>
+      </div>
+</div>
+<div class="container">
+    <% include partials/message %>
+    <div class="columns is-centered">
+        <article class="message is-info">
+            <div class="message-header">
+                <p>Login:</p>
+            </div>
+        <div class="message-body">
+            <form action="/login" method="POST">
+                <div class="field">
+                    <label class="label">Username</label>
+                        <div class="control has-icons-left">
+                            <input class="input" type="text" placeholder="Username" name="username" maxlength="15">
+                            <span class="icon is-left">
+                                <i class="fa fa-user"></i>
+                            </span>
+                        </div>
+                </div>
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control has-icons-left">
+                        <input class="input" type="password" placeholder="Password" name="password" maxlength="30">
+                        <span class="icon is-left">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                    </div>
+                </div>
+                <button class="button is-link"><i class="fa fa-key">&nbsp;</i>Login</button>
+                <br>
+		<p><a href="/register">Don't have an account? Click here to register.</a></p>
+            </form>
+        </div>
+        </article>
+    </div>
+</div>
+<% include partials/footer %>

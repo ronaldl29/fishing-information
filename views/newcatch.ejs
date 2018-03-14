@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Catch - fishingBakersfield</title>
+<% include partials/header %>
+<% include partials/loginbar %>
+<div class="container">
+<a class="button" href="/addcatch"><i class="fa fa-arrow-left">&nbsp;</i>Add Catch</a>
+<br>
+<br>
+<% include partials/message %>
+<div id="errorIMsg" style="display: none">
+  <article class="message is-warning" id="delete" style="margin-bottom: 1rem;">
+    <div class="message-header">
+      <p><i class="fa fa-exclamation-triangle">&nbsp;</i>Error</p>
+      <button class="delete" onclick="hideMsg()" aria-label="delete"></button>
+    </div>
+    <div class="message-body">
+      Adding an image to your catch is required.
+    </div>
+  </article>
+</div>
+<article class="message is-info">
+    <div class="message-header">
+        <p>Add new catch from <%= location.name %>:</p>
+    </div>
+    <div class="message-body">
+      <form action="/locations/<%= location._id %>/catch" method="POST" enctype='multipart/form-data'>
+        <div class="field">
+            <label class="label">Species</label>
+            <div class="select">
+                <select name="species">
+                    <option value="Rainbow Trout">Rainbow Trout</option>
+                    <option value="Striped Bass">Striped Bass</option>
+                    <option value="Largemouth Bass">Largemouth Bass</option>
+                    <option value="Catfish">Catfish</option>
+                    <option value="Carp">Carp</option>
+                    <option value="Crappie">Crappie</option>
+                    <option value="Bluegill">Bluegill</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </div>
+        <div class="field">
+          <label class="label">Description</label>
+              <div class="control">
+                <textarea rows="5" class="textarea" class="input" type="text" placeholder="What you used, rig setup, technique, etc.." name="description"></textarea>
+              </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Image (required)</label>
+          <input type="file" id="image" name="image">
+        </div>
+
+       <input type="hidden" value="<%= location.name %>" name="catchlocation">
+       <input type="hidden" value="<%= location._id %>" name="catchlocationid">
+
+
+
+        <p id="loadingNotice"></p>
+             <button id="button" onclick="return checkForFile()" class="button is-link">Upload</button>
+    </form>
+
+    </div>
+
+    </article>
+
+
+
+</div>
+<script>
+var inputFile = document.getElementById("image");
+var btn1 = document.getElementById("button");
+var loadingNotice = document.getElementById("loadingNotice");
+function checkForFile(){
+	if(inputFile.value.length == 0){
+            document.getElementById('errorIMsg').style.display = '';
+            return false;
+     } else {
+	    btn1.classList.add("is-loading");
+            loadingNotice.innerHTML= '<div class="notification is-warning"><p>Uploading a large image can take a few seconds.<p></div>';
+            return true;
+}
+}
+</script>
+<% include partials/footer %>

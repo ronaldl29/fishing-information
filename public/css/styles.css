@@ -1,0 +1,68 @@
+#imgmax {
+  max-height: 426px !important;
+  max-width: 320px !important;
+}
+
+#imgmax {
+  max-height: 426px;
+  max-width: 320px;
+}
+
+.svg-icon-small {
+  height: 16px;
+  width: 16px;
+  margin-left: 2px;
+  margin-right: 2px;
+  color: inherit;
+}
+
+.is-256x256 {
+  height: 256px;
+  width: 256px;
+}
+
+#noBM:not(:last-child) {
+  margin-bottom: 0.1rem !important,
+}
+
+.sameLine {
+  display: inline;
+}
+
+html {
+   background-color: #eaeaea
+}
+
+@media screen and (min-width: 420px) {
+.masonry {
+    column-count: 2;
+    column-gap: 1em;
+}
+}
+
+.item {
+    background-color: #eee;
+    display: inline-block;
+    margin: 0 0 1em;
+    width: 100%;
+}
+
+.nav-button-margin {
+	margin-left: 5px
+}
+
+.selector-btn {
+  width: 80%;
+}
+
+@media screen and (max-width: 700px) {
+  .selector-btn {
+	width: 100%;
+  }
+}
+
+.button-img {
+    float: left;
+    width: 30px;
+    height: 30px;
+}

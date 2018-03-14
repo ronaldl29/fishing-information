@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Location - fishingBakersfield</title>
+<% include partials/header %>
+<br>
+<% include partials/message %>
+<div class="container">
+    <form action="/locations" method="POST">
+        <div class="field">
+          <label class="label">Location Name</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="Location Name" name="name">
+              </div>
+        </div>
+        <div class="field">
+          <label class="label">GPS</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="GPS" name="gps">
+              </div>
+        </div>
+        <div class="field">
+          <label class="label">Image</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="Image" name="image">
+              </div>
+        </div>
+        <div class="field">
+          <label class="label">Thumbnail</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="Thumbnail 128x128" name="thumbnail">
+              </div>
+        </div>
+        <div class="field">
+          <label class="label">Description</label>
+              <div class="control">
+                <textarea class="textarea" type="text" rows="18" placeholder="Description" name="description"></textarea>
+              </div>
+        </div>
+        <button id="button" class="button is-link">Upload</button>
+    </form>
+</div>
+<% include partials/footer %>

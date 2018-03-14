@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Page - fishingBakersfield</title>
+<% include partials/header %>
+<br>
+<% include partials/message %>
+<div class="container">
+    <% users.forEach(function(user){ %>
+      <p><%= user.username %></p>
+      <% }) %>
+</div>
+<% include partials/footer %>

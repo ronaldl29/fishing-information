@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Location - fishingBakersfield</title>
+<% include partials/header %>
+<br />
+<% include partials/message %>
+<div class="container">
+    <p>Edit <%= location.name %></p>
+    <form action="/locations/<%= location._id %>?_method=PUT" method="POST">
+        <div class="field">
+          <label class="label">Location Name</label>
+              <div class="control">
+                <input class="input" type="text" value="<%= location.name %>" name="name">
+              </div>
+        </div>
+        <div class="field">
+          <label class="label">GPS</label>
+              <div class="control">
+                <input class="input" type="text" value="<%= location.gps %>" name="gps">
+              </div>
+        </div>
+        <div class="field">
+          <label class="label">Thumbnail</label>
+              <div class="control">
+                <input class="input" type="text" value="<%= location.thumbnail %>" name="thumbnail">
+              </div>
+        </div>
+        <div class="field">
+          <label class="label">Image</label>
+              <div class="control">
+                <input class="input" type="text" value="<%= location.image %>" name="image">
+              </div>
+        </div>
+        <div class="field">
+          <label class="label">Description</label>
+              <div class="control">
+		<textarea class="textarea" type="text" rows="18" name="description"><%= location.description %></textarea>
+              </div>
+        </div>
+        <button id="button" class="button is-link">Update Location</button>
+    </form>
+</div>
+<% include partials/footer %>

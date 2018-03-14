@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>fishingBakersfield</title>
+<% include partials/header %>
+<% include partials/loginbar %>
+<div class="container">
+<% include partials/message %>
+<div class="box">
+<% location.forEach(function(location){ %>
+  <div style="text-align: center">
+  	<a class="button selector-btn" href="locations/<%= location._id %>/catch/new"><img src="<%= location.thumbnail %>" class="button-img">&nbsp;<%= location.name %><img src="icons/arrow-right.svg" class="svg-icon-small"></a>
+  </div>
+  <br>
+<% }) %>
+</div>
+<% include partials/footer %>

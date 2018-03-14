@@ -1,0 +1,47 @@
+      <link rel="stylesheet" type="text/css" href="/css/bulma.css">
+      <link rel="stylesheet" type="text/css" href="/css/styles.css">
+      <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+      <link rel="shortcut icon" type="image" href="/favicon.ico"/>
+      <link href="http://fishingbakersfield.com" hreflang="en-us" rel="alternate" title="fishingBakersfield" type="text/html"/>
+      <script src="/js/menu.js"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      <meta name="description" content="Find new places to fish and share what you've caught with other anglers all
+           around Bakersfield and Kern County. We will help you catch fish at the Aqueduct, Lake Isabella, Kern River, and more!" />
+      <meta name="google-site-verification" content="6lhLBt7HB6f5HbmpWXU3YlHBDgM5Mhu4QKsvH7F5kQM" />
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112861959-1"></script>
+      <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-112861959-1');
+      </script>
+
+</head>
+<body>
+    <nav class="navbar is-dark">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <p><img src="/logo.png">&nbsp;<p>fishing<strong>Bakersfield</strong></p>
+          </a>
+          <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div id="navbarExampleTransparentExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" href="/"><i class="fa fa-home">&nbsp;</i>Home</a>
+            <a class="navbar-item" href="/catches/1"><i class="fa fa-rss">&nbsp;</i>Feed</a>
+            <a class="navbar-item" href="/resources"><i class="fa fa-exchange">&nbsp;</i>Links</a>
+             </div>         <div class="navbar-end">
+               <% if(currentUser){ %>
+                 <a class="navbar-item" href="/dashboard"><i class="fa fa-user-circle-o">&nbsp;</i> Hello, <%= currentUser.username %>!</a>
+                 <a class="navbar-item" href="/logout"><i class="fa fa-times">&nbsp;</i>Logout</a>
+                <% } else { }%>
+        </div>
+       </div>
+      </div>
+    </nav>

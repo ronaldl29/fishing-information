@@ -1,0 +1,22 @@
+<% if(error && error.length > 0){ %>
+  <article class="message is-warning" id="delete">
+    <div class="message-header">
+      <p><i class="fa fa-exclamation-triangle">&nbsp;</i>Error</p>
+      <button class="delete" onclick="hideMsg()" aria-label="delete"></button>
+    </div>
+    <div class="message-body">
+      <%- error %>
+    </div>
+  </article>
+<% } %>
+<% if(success && success.length > 0){ %>
+  <article class="message is-success" id="delete">
+    <div class="message-header">
+      <p><i class="fa fa-check-square">&nbsp;</i>Success</p>
+      <button class="delete" onclick="hideMsg()" aria-label="delete"></button>
+    </div>
+    <div class="message-body">
+      <%- success %>
+    </div>
+  </article>
+<% } %>

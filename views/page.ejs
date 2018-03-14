@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <% for (var i = 0; i < posts.length; i++) { %>
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="<%= posts[i].image %>">
+                        <div class="caption">
+                            <h3><%= posts[i].species %></h3>
+                            <p><%= posts[i].description %></p>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+            <% if (pages > 0) { %>
+                <ul class="pagination text-center">
+                    <% if (current == 1) { %>
+                        <li class="disabled"><a>First</a></li>
+                    <% } else { %>
+                        <li><a href="/catches/1">First</a></li>
+                    <% } %>
+                    <% if (Number(current) - 1 > 0) { %>
+                        <li><a href="/catches/<%= Number(current) - 1 %>">Prev</a></li>
+                    <% } %>
+                    <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                    <% if (i !== 1) { %>
+                        <li class="disabled"><a>...</a></li>
+                    <% } %>
+                    <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                        <% if (i == current) { %>
+                            <li class="active"><a><%= i %></a></li>
+                        <% } else { %>
+                            <li><a href="/catches/<%= i %>"><%= i %></a></li>
+                        <% } %>
+                        <% if (i == Number(current) + 4 && i < pages) { %>
+                            <li class="disabled"><a>...</a></li>
+                        <% } %>
+                    <% } %>
+                    <% if (Number(current) + 1 <= pages) { %>
+                        <li><a href="/catches/<%= Number(current) + 1 %>">Next</a></li>
+                    <% } %>
+                    <% if (current == pages) { %>
+                        <li class="disabled"><a>Last</a></li>
+                    <% } else { %>
+                        <li><a href="/catches/<%= pages %>">Last</a></li>
+                    <% } %>
+                </ul>
+            <% } %>
+    </div>
+</body>
+</html>

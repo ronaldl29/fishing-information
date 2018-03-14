@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit My Catch - fishingBakersfield</title>
+<% include partials/header %>
+<div class="block">
+      <div class="notification is-info">
+        <p>Made a mistake? No worries, you can fix it here.</p>
+      </div>
+</div>
+<% include partials/message %>
+<div class="container">
+          <!-- BREADCRUMB NAV -->
+        <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/locations/<%= locationID %>"><%= post.catchlocation %></a></li>
+            <li class="is-active"><a href="#" aria-current="page">Edit Catch</a></li>
+          </ul>
+        </nav>
+      <!-- END BREADCRUMB NAV -->
+        <article class="message is-info">
+            <div class="message-header">
+                <p>Edit Catch</p>
+            </div>
+            <div class="message-body">
+
+
+
+
+
+
+    <form action="/locations/<%= locationID %>/catch/<%= post._id %>?_method=PUT" method="POST">
+        <div class="field">
+          <label class="label">Picture</label>
+              <div class="control">
+                  <img src="<%= post.image %>" class="image is-128x128">
+              </div>
+        </div>
+          <div class="field">
+          <label class="label">Location</label>
+              <div class="control">
+                  <p><%= post.catchlocation %></p>
+              </div>
+        </div>
+        <div class="field">
+          <label class="label">Description</label>
+              <div class="control">
+                <textarea class="textarea" rows="5" type="text" name="post[description]"><%= post.description %></textarea>
+              </div>
+        </div>
+        <button class="button is-link">Update Catch</button>
+    </form>
+        <br />
+    </div>
+    
+    </article>
+    
+    
+    
+</div>
+<% include partials/footer %>

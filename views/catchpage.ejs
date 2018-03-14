@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= post.author.username %>'s Catch - fishingBakersfield</title>
+<% include partials/header %>
+<% include partials/loginbar %>
+<div class="container">
+  <% include partials/message %>
+    <div class="box">
+        <div class="columns">
+            <div class="column is-6">
+                <figure class="image">
+                    <img src="<%= post.image %>">
+                </figure>
+            </div>
+            <div class="column is-6">
+                <figure>
+                        <p style="font-size: 22px"><strong><i class="fa fa-user">&nbsp;</i><%= post.author.username %></strong></p>
+                        <p><i class="fa fa-map-signs">&nbsp;</i><%= post.catchlocation %></p>
+                        <time><i class="fa fa-calendar">&nbsp;</i><%= post.createdAt.toDateString() %></time>
+                        <br>
+                        <br>
+                        <div class="content">
+                            <p><%= post.description %></p>
+                        </div>
+                        <br>
+                        <br>
+                </figure>
+            </div>
+        </div>
+    </div>
+	<br>
+	<br>
+</div>
