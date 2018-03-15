@@ -1,6 +1,6 @@
 # What is Fishing Social? #
 A social network and content management system hybrid for building a local fishing guide website. A user system and news
-feed that comes right out of the box. This system is still in beta.
+feed that comes right out of the box. This system is still in beta. Built on Node.js and MongoDB. Uses a customized version of Bulma CSS for stylesheets.
 
 # To-Do List #
 1. Remove font awesome dependency and switch to SVG icons... 10%
