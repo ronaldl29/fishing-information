@@ -14,3 +14,11 @@ feed that comes right out of the box. This system is still in beta.
 
 # Minor Improvements Needed #
 1. Link to specified location page from feed and catch page
+2. Finish change email function
+
+# Requirements #
+1. Node.js
+2. MongoDB
+
+# Installation #
+1. Run `npm install`
