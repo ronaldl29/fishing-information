@@ -21,4 +21,7 @@ feed that comes right out of the box. This system is still in beta.
 2. MongoDB
 
 # Installation #
-1. Run `npm install`
+1. Register for Google ReCAPTCHA and add desired domain (if localhost, use localhost)
+2. Add reCAPTCHA key to App.js
+2. Navigate to `// Setup Express Session` and edit `ADD YOUR KEY` to your desired secret key
+3. Run `npm install`
