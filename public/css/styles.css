@@ -1,11 +1,8 @@
-#imgmax {
-  max-height: 426px !important;
-  max-width: 320px !important;
-}
-
-#imgmax {
-  max-height: 426px;
-  max-width: 320px;
+.svg-icon-xs {
+  height: 10px;
+  width: 10px;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 .svg-icon-small {
@@ -13,12 +10,18 @@
   width: 16px;
   margin-left: 2px;
   margin-right: 2px;
-  color: inherit;
 }
 
-.is-256x256 {
-  height: 256px;
-  width: 256px;
+.svg-icon-20 {
+  height: 20px;
+  width: 20px;
+  margin-right: 1px;
+}
+
+.svg-icon-md {
+  height: 25px;
+  width: 25px;
+  margin-right: 1px;
 }
 
 #noBM:not(:last-child) {

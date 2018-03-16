@@ -1,8 +1,8 @@
       <link rel="stylesheet" type="text/css" href="/css/bulma.css">
       <link rel="stylesheet" type="text/css" href="/css/styles.css">
-      <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+      <!-- <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"> -->
       <link rel="shortcut icon" type="image" href="/favicon.ico"/>
-      <link href="http://fishingbakersfield.com" hreflang="en-us" rel="alternate" title="fishingBakersfield" type="text/html"/>
+      <link href="https://fishingbakersfield.com" hreflang="en-us" rel="alternate" title="fishingBakersfield" type="text/html"/>
       <script src="/js/menu.js"></script>
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       <meta name="description" content="Find new places to fish and share what you've caught with other anglers all
@@ -33,13 +33,13 @@
         </div>
         <div id="navbarExampleTransparentExample" class="navbar-menu">
           <div class="navbar-start">
-            <a class="navbar-item" href="/"><i class="fa fa-home">&nbsp;</i>Home</a>
-            <a class="navbar-item" href="/catches/1"><i class="fa fa-rss">&nbsp;</i>Feed</a>
-            <a class="navbar-item" href="/resources"><i class="fa fa-exchange">&nbsp;</i>Links</a>
+            <a class="navbar-item" href="/"><img src="/icons/home-white.svg" class="svg-icon-small" />Home</a>
+            <a class="navbar-item" href="/catches/1"><img src="/icons/feed-white.svg" class="svg-icon-small" />Feed</a>
+            <a class="navbar-item" href="/resources"><img src="/icons/link-white.svg" class="svg-icon-small" />Links</a>
              </div>         <div class="navbar-end">
                <% if(currentUser){ %>
-                 <a class="navbar-item" href="/dashboard"><i class="fa fa-user-circle-o">&nbsp;</i> Hello, <%= currentUser.username %>!</a>
-                 <a class="navbar-item" href="/logout"><i class="fa fa-times">&nbsp;</i>Logout</a>
+                 <a class="navbar-item" href="/dashboard"><img src="/icons/user-circle-white.svg" class="svg-icon-small"> Hello, <%= currentUser.username %>!</a>
+                 <a class="navbar-item" href="/logout"><img src="/icons/times-white.svg" class="svg-icon-small" />Logout</a>
                 <% } else { }%>
         </div>
        </div>

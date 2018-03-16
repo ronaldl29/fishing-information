@@ -3,115 +3,125 @@
 <% } else { %>
 <!DOCTYPE html>
 <html>
-<head>
-    <title>All Catches - fishingBakersfield</title>
-<% include partials/header %>
-<% include partials/loginbar %>
-<div class="container">
-<% include partials/message %>
-<a class="button" href="/locations/<%= posts[0].catchlocationid %>"><i class="fa fa-arrow-left">&nbsp;</i>All Locations</a>
-<br>
-<br>
-      <div class="box">
-	<div class="content">
-	<p style="font-size: 20px"><i class="fa fa-rss">&nbsp;</i>All catches from <%= posts[0].catchlocation %>:</p>
-	<hr>
-	</div>
-		<p>
-	    <a class="button is-success" href="/locations/<%= posts[0].catchlocationid %>/catch/new"><i class="fa fa-plus">&nbsp;</i>Add Catch</a>
-            <span style="float: right; font-size: 12px">Sorted By: <i class="fa fa-clock-o">&nbsp;</i>Most Recent</span>
-		</p>
-	<br>
-        <div class="masonry">
-            <% for (var i = 0; i < posts.length; i++) { %>
-  		<div class="item">
-		<div class="card">
-  <div class="card-header">
-        <figure class="image">
-      <img src="<%= posts[i].image %>" alt="<%= posts[i].species %>">
-      </figure>
-
-  </div>
-  <div class="card-content">
-    <div class="media">
-      <div class="media-content">
-        <p class="title is-4"><i class="fa fa-user">&nbsp;</i><%= posts[i].author.username %></p>
-        <p class="subtitle is-6"><i class="fa fa-map-signs">&nbsp;</i><%= posts[i].catchlocation %></p>
-      </div>
-    </div>
-
-    <div class="content">
-      <%= posts[i].description %>
-      <br>
-      <time><i class="fa fa-calendar">&nbsp;</i><%= posts[i].createdAt.toDateString() %></time><br>
-	                                                            <% if(currentUser && posts[i].author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
-                                                                <a class="button is-small is-warning" href="/locations/<%= posts[i].catchlocationid %>/catch/<%= posts[i]._id %>/edit">
-                                                                       <i class="fa fa-pencil-square-o">&nbsp;</i>Edit
-                                                                </a>
-                                                                <form class="sameLine" action="/locations/<%= posts[i].catchlocationid %>/catch/<%= posts[i]._id %>?_method=DELETE" method="POST">
-                                                                        <button class="button is-small is-danger">
-                                                                        <i class="fa fa-trash">&nbsp;</i>Delete</button>
-                                                                </form>
-                                                            <% } %>
-    </div>
-  </div>
-							<footer class="card-footer">
-							<a class="card-footer-item" href="/catch/<%= posts[i]._id %>"><i class="fa fa-share">&nbsp;</i>Open</a>
-							</footer>
-  </div>
-</div>
-<br />
+  <head>
+    <title>Fish Caught At <%= posts[0].catchlocation %></title>
+    <% include partials/header %>
+    <% include partials/loginbar %>
+      <div class="container">
+        <% include partials/message %>
+        <a class="button" href="/locations/<%= posts[0].catchlocationid %>">
+          <img src="/icons/arrow-left.svg" class="svg-icon-small"><%= posts[0].catchlocation %>
+        </a>
+        <br>
+        <br>
+        <div class="box">
+	         <div class="content">
+	            <p style="font-size: 27px; color: black"><img src="/icons/feed.svg" class="svg-icon-md">
+                Fish Caught At <a style="color: black;" href="/locations/<%= posts[0].catchlocationid %>">
+                <%= posts[0].catchlocation %></a>:
+              </p>
+	            <hr>
+	          </div>
+            <p style="font-size: 12px">Sorted By: <img src="/icons/clock.svg" class="svg-icon-xs">Most Recent</p>
+            <br>
+		        <div style="text-align: center">
+	             <a class="button is-success" style="width: 100%" href="/locations/<%= posts[0].catchlocationid %>/catch/new">
+               <img src="/icons/plus-white.svg" class="svg-icon-small">Add Catch</a>
+		        </div>
+	          <br>
+            <div class="masonry">
+            <!-- CATCH CARDS -->
+              <% for (var i = 0; i < posts.length; i++) { %>
+  		          <div class="item">
+		              <div class="card">
+                    <div class="card-header">
+                      <figure class="image">
+                        <img src="<%= posts[i].image %>" alt="<%= posts[i].species %>">
+                      </figure>
+                    </div>
+                    <div class="card-content">
+                      <div class="media">
+                        <div class="media-content">
+                          <p class="title is-4"><img src="/icons/user.svg" class="svg-icon-20"><%= posts[i].author.username %></p>
+                          <p class="subtitle is-6"><em><%= posts[i].species %></em></p>
+                        </div>
+                      </div>
+                      <div class="content">
+                        <%= posts[i].description %>
+                        <br>
+                        <time><img src="/icons/calendar.svg" class="svg-icon-small"><%= posts[i].createdAt.toDateString() %></time><br>
+	                      <% if(currentUser && posts[i].author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
+                          <div style="text-align: center">
+                            <a class="button is-small is-warning" href="/locations/<%= posts[i].catchlocationid %>/catch/<%= posts[i]._id %>/edit">
+                              Edit
+                            </a>
+                            <form class="sameLine" action="/locations/<%= posts[i].catchlocationid %>/catch/<%= posts[i]._id %>?_method=DELETE" method="POST">
+                              <button class="button is-small is-danger">
+                                Delete
+                              </button>
+                            </form>
+                          </div>
+                        <% } %>
+                      </div>
+                    </div>
+							      <footer class="card-footer">
+							        <a class="card-footer-item" href="/catch/<%= posts[i]._id %>">
+                        <img src="/icons/anchor.svg" class="svg-icon-small">&nbsp;<p style="color: black">Open</p>
+                      </a>
+							      </footer>
+                  </div>
+                </div>
+                <br>
             <% } %>
+          </div>
         </div>
-        </div>
- <% if (pages > 0) { %>
-
-        <nav class="pagination" role="navigation" aria-label="pagination">
-        <% if (Number(current) - 1 > 0) { %>
-            <a class="pagination-previous" href="/locations/<%= post[0].catchlocationid %>/catches/<%= Number(current) - 1 %>"><i class="fa fa-arrow-circle-left">&nbsp;</i>Previous</a>
-        <% } else { %>
-	    <a class="pagination-previous" disabled><i class="fa fa-arrow-circle-left">&nbsp;</i>Previous</a>
-	<% } %>
-	<% if (Number(current) + 1 <= pages) { %>
-            <a href="/locations/<%= posts[0].catchlocationid %>/catches/<%= Number(current) + 1 %>" class="pagination-next"><i class="fa fa-arrow-circle-right">&nbsp;</i>Next page</a>
-        <% } else { %>
-            <a class="pagination-next" disabled><i class="fa fa-arrow-circle-right">&nbsp;</i>Next page</a>
-	<% } %>
+        <!-- PAGINATION -->
+        <% if (pages > 0) { %>
+          <nav class="pagination" role="navigation" aria-label="pagination">
+            <% if (Number(current) - 1 > 0) { %>
+              <a class="pagination-previous" href="/locations/<%= post[0].catchlocationid %>/catches/<%= Number(current) - 1 %>"><img src="/icons/circle-arrow-left.svg" class="svg-icon-small">Previous</a>
+            <% } else { %>
+	             <a class="pagination-previous" disabled><img src="/icons/circle-arrow-left.svg" class="svg-icon-small">Previous</a>
+	          <% } %>
+	           <% if (Number(current) + 1 <= pages) { %>
+               <a href="/locations/<%= posts[0].catchlocationid %>/catches/<%= Number(current) + 1 %>" class="pagination-next"<img src="/icons/circle-arrow-right.svg" class="svg-icon-small">Next page</a>
+            <% } else { %>
+               <a class="pagination-next" disabled><img src="/icons/circle-arrow-right.svg" class="svg-icon-small">Next page</a>
+	          <% } %>
             <ul class="pagination-list">
-            <% var i = (Number(current) > 3 ? Number(current) - 2 : 1) %>
-            <% if (current == 1) { %>
-              			<li>
-                			<a class="pagination-link" disabled>First</a>
-              			</li>
+              <% var i = (Number(current) > 3 ? Number(current) - 2 : 1) %>
+                <% if (current == 1) { %>
+              		<li>
+                		<a class="pagination-link" disabled>First</a>
+              		</li>
             		<% } else { %>
-              			<li>
-                			<a class="pagination-link" href="/locations/<%= posts[0].catchlocationid %>/catches/1">First</a>
-              			</li>
-	    		<% } %>
-            <% for (; i <= (Number(current) + 2) && i <= pages; i++) { %>
-                <% if (i == current) { %>
+              		<li>
+                		<a class="pagination-link" href="/locations/<%= posts[0].catchlocationid %>/catches/1">First</a>
+              		</li>
+	    		      <% } %>
+                  <% for (; i <= (Number(current) + 2) && i <= pages; i++) { %>
+                    <% if (i == current) { %>
                      <li>
-                         <a class="pagination-link is-current"><%= i %></a>
+                       <a class="pagination-link is-current"><%= i %></a>
                      </li>
-                <% } else { %>
-		     <li>
-			 <a class="pagination-link" href="/locations/<%= posts[0].catchlocationid %>/catches/<%= i %>"><%= i %></a>
-		     </li>
-		<% } %>
-		<% } %>
+                    <% } else { %>
+		                 <li>
+			                 <a class="pagination-link" href="/locations/<%= posts[0].catchlocationid %>/catches/<%= i %>"><%= i %></a>
+		                 </li>
+		                <% } %>
+		            <% } %>
             		<% if (current == pages) { %>
-				<li>
-		    			<a class="pagination-link" disabled>Last</a>
-				</li>
+				          <li>
+		    			      <a class="pagination-link" disabled>Last</a>
+				          </li>
             		<% } else { %>
-				<li>
-		    			<a href="/locations/<%= posts[0].catchlocationid %>/catches/<%= pages %>" class="pagination-link">Last</a>
-				</li>
-            		<% } %>
+				          <li>
+		    			      <a href="/locations/<%= posts[0].catchlocationid %>/catches/<%= pages %>" class="pagination-link">Last</a>
+				          </li>
+            	 	<% } %>
             </ul>
           </nav>
-
-<% } %>
-</div>
-<% include partials/footer %>
+      <% } %>
+    </div>
+  <% include partials/footer %>
 <% } %>

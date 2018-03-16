@@ -428,6 +428,10 @@ app.get("/resources", function(req, res){
 	res.render("resources");
 });
 
+app.get("/howdeepistruxtunlake", function(req, res){
+  res.render("truxtundepth");
+})
+
 // Not found page - KEEP LAST
 app.get("*", function(req, res){
     res.render("notfound");

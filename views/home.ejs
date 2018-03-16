@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home - fishingBakersfield</title>
+<% include partials/header %>
+<% if(!currentUser){ %>
+<br>
+<div class="block">
+  <div class="buttons is-centered">
+    <a href="/login" class="button is-primary"><i class="fa fa-key">&nbsp;</i>Login</a>
+    <a href="/register" class="button is-link"><i class="fa fa-user-plus">&nbsp;</i>Register</a>
+  </div>
+</div>
+<% } else { %>
+<br><br>
+<% } %>
+<% include partials/message %>
+
+
+
+<div class="container">
+  <div class="masonry">
+
+    <% location.forEach(function(msg){ %>
+  <div class="item">
+<div class="card">
+  <div class="card-header">
+        <figure class="image">
+      <img src="<%= msg.image %>" alt="<%= msg.species %>">
+      </figure>
+  
+  </div>
+  <div class="card-content">
+    <div class="media">
+      <div class="media-content">
+        <p class="title is-4"><i class="fa fa-user">&nbsp;</i><%= msg.author.username %></p>
+        <p class="subtitle is-6"><i class="fa fa-map-signs">&nbsp;</i><%= msg.catchlocation %></p>
+      </div>
+    </div>
+
+    <div class="content">
+      <%= msg.description %>
+      <br>
+      <time><i class="fa fa-calendar">&nbsp;</i><%= msg.createdAt.toDateString() %></time>
+    </div>
+  </div>
+  </div>
+</div>
+
+<br />
+    <% }) %>
+</div>
+</div>
+
+<% include partials/footer %>

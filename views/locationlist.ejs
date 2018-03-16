@@ -1,60 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>fishingBakersfield</title>
-<% include partials/header %>
-<% include partials/loginbar %>
-<div class="container">
-<% include partials/message %>
-<% if(currentUser && currentUser.isAdmin){ %>
-<br>
-<a class="button is-success" href="/locations/add"><i class="fa fa-plus">&nbsp;</i>Add Location</a>
-<% } else { } %>
-<!-- NEW TILE SETUP -->
-<div id="columns is-multiline is-centered">
-    <% location.forEach(function(location){ %>
-    <div class="column is-6 is-pulled-left">
-    <div class="box">
-      <p><i class="fa fa-map-signs"></i><strong>&nbsp;<%= location.name %></strong></p>
-      <p><i class="fa fa-tags"></i>&nbsp;</i>
-	<% if(location.catches.length == 0){ %>
-	<em>No catches</em>
-	<% } %>
-	<% if(location.catches.length == 1){ %>
-	<em>1 catch</em>
-	<% } %>
-	<% if(location.catches.length > 1){ %>
-	<em><%= location.catches.length %> catches</em>
-	<% } %>
-      <article class="media">
-        <div class="media-left">
-          <figure class="image is-128x128">
-              <img src="<%= location.thumbnail %>" alt="<%= location.name %>">
-          </figure>
-        </div>
-        <div class="media content">
-          <div class="content">
-            <p><%- location.description.substring(0, 90) + "..." %></p>
-          </div>
-        </div>
-      </article>
-
-
-
-
-
-
-
-
-
-
-	<br>
-    <a class="button" href="http://www.google.com/maps/place/<%= location.gps %>"><i class="fa fa-map-marker">&nbsp;</i>Maps</a>
-    <a href="/locations/<%= location._id %>" class="button" style="float: right;">Read More<img src="icons/arrow-right.svg" class="svg-icon-small"></a>
-</div>
-</div>
-    <% }) %>
-</div>
-</div>
-
+    <title>Bakersfield Fishing Locations</title>
+    <% include partials/header %>
+    <% include partials/loginbar %>
+      <div class="container">
+        <% include partials/message %>
+        <!-- COLUMN TILES -->
+        <div class="columns is-multiline is-centered">
+          <% location.forEach(function(location){ %>
+            <div class="column is-6 is-pulled-left">
+              <div class="box">
+                <!-- LOCATION NAME -->
+                <p><img src="/icons/map-sign.svg" class="svg-icon-small">
+                  <strong><%= location.name %></strong></p>
+                <!-- CATCH NUMBER -->
+                <p><img src="/icons/tags.svg" class="svg-icon-small">
+	                 <% if(location.catches.length == 0){ %>
+	                    <em>No catches</em>
+	                 <% } %>
+	                 <% if(location.catches.length == 1){ %>
+	                    <em>1 catch</em>
+	                 <% } %>
+	                 <% if(location.catches.length > 1){ %>
+	                    <em><%= location.catches.length %> catches</em>
+	                 <% } %>
+                <!-- LOCATION CONTENT -->
+                <article class="media">
+                  <div class="media-left">
+                    <figure class="image is-128x128">
+                      <img src="<%= location.thumbnail %>" alt="<%= location.name %>">
+                    </figure>
+                  </div>
+                  <div class="media content">
+                    <div class="content">
+                      <p><%- location.description.substring(0, 90) + "..." %></p>
+                    </div>
+                  </div>
+                </article>
+                <br>
+                <!-- LOCATION BUTTONS -->
+                <a class="button" href="http://www.google.com/maps/place/<%= location.gps %>">
+                  <img src="/icons/map.svg" class="svg-icon-small">Maps
+                </a>
+                <a href="/locations/<%= location._id %>" class="button" style="float: right;">Read More
+                  <img src="/icons/arrow-right.svg" class="svg-icon-small">
+                </a>
+              </div>
+            </div>
+         <% }) %>
+       </div>
+       <!-- ADD LOCATION BUTTON -->
+       <% if(currentUser && currentUser.isAdmin){ %>
+         <br>
+         <a style="width: 100%" class="button is-success" href="/locations/add">
+           <img src="/icons/plus-white.svg" class="svg-icon-small" />Add Location
+         </a>
+       <% } %>
+     </div>
 <% include partials/footer %>

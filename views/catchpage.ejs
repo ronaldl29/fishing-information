@@ -1,34 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title><%= post.author.username %>'s Catch - fishingBakersfield</title>
-<% include partials/header %>
-<% include partials/loginbar %>
-<div class="container">
-  <% include partials/message %>
-    <div class="box">
-        <div class="columns">
-            <div class="column is-6">
+  <head>
+    <title><%= post.author.username %>'s Catch</title>
+    <% include partials/header %>
+    <% include partials/loginbar %>
+      <div class="container">
+        <% include partials/message %>
+          <div class="box">
+            <div class="columns">
+              <div class="column is-6">
                 <figure class="image">
-                    <img src="<%= post.image %>">
+                  <img src="<%= post.image %>">
                 </figure>
-            </div>
-            <div class="column is-6">
+              </div>
+              <div class="column is-6">
                 <figure>
-                        <p style="font-size: 22px"><strong><i class="fa fa-user">&nbsp;</i><%= post.author.username %></strong></p>
-                        <p><i class="fa fa-map-signs">&nbsp;</i><%= post.catchlocation %></p>
-                        <time><i class="fa fa-calendar">&nbsp;</i><%= post.createdAt.toDateString() %></time>
-                        <br>
-                        <br>
-                        <div class="content">
-                            <p><%= post.description %></p>
-                        </div>
-                        <br>
-                        <br>
+                  <p style="font-size: 22px"><strong><img src="/icons/user.svg" class="svg-icon-20"><%= post.author.username %></strong></p>
+                  <p><img src="/icons/map-sign.svg" class="svg-icon-small">
+                    <a style="color: black;" href="/locations/<%= post.catchlocationid %>"><%= post.catchlocation %></a>
+                  </p>
+                  <time><img src="/icons/calendar.svg" class="svg-icon-small"><%= post.createdAt.toDateString() %></time>
+                  <br>
+                  <br>
+                  <div class="content">
+                    <p><%= post.description %></p>
+                  </div>
+                  <br>
+                  <br>
                 </figure>
+              </div>
             </div>
-        </div>
-    </div>
-	<br>
-	<br>
+            <% if(currentUser && post.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
+              <div style="text-align: center">
+                <a class="button is-small is-warning" href="/locations/<%= post._id %>/catch/<%= post._id %>/edit">
+                  <i class="fa fa-pencil-square-o">&nbsp;</i>Edit
+                </a>
+                <form class="sameLine" action="/locations/<%= post._id %>/catch/<%= post._id %>?_method=DELETE" method="POST">
+                  <button class="button is-small is-danger">
+                    Delete
+                  </button>
+                </form>
+              </div>
+            <% } %>
+          </div>
+	        <br>
+	        <br>
 </div>
+<% include partials/footer %>

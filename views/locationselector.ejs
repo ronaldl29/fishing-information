@@ -7,11 +7,12 @@
 <div class="container">
 <% include partials/message %>
 <div class="box">
-<% location.forEach(function(location){ %>
-  <div style="text-align: center">
-  	<a class="button selector-btn" href="locations/<%= location._id %>/catch/new"><img src="<%= location.thumbnail %>" class="button-img">&nbsp;<%= location.name %><img src="icons/arrow-right.svg" class="svg-icon-small"></a>
+  <div class="columns is-multiline">
+    <% location.forEach(function(location){ %>
+      <div class="column is-6">
+        <a class="button selector-btn" href="locations/<%= location._id %>/catch/new"><img src="<%= location.thumbnail %>" class="button-img">&nbsp;<%= location.name %><img src="icons/arrow-right.svg" class="svg-icon-small"></a>
+      </div>
+    <% }) %>
   </div>
-  <br>
-<% }) %>
 </div>
 <% include partials/footer %>
