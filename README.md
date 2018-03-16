@@ -17,8 +17,11 @@ feed that comes right out of the box. This system is still in beta. Built on Nod
 2. Finish change email function
 
 # Requirements #
-1. Node.js
-2. MongoDB
+1. Node.js 8.9
+2. MongoDB 3.4
+
+# Known Bugs #
+1. When using MongoDB 3.6, the catch won't be added to specified location. MongoDB 3.4 is recommended at this time.
 
 # Installation #
 1. Register for Google ReCAPTCHA and add desired domain (if localhost, use localhost)
