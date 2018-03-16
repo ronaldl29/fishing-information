@@ -13,7 +13,7 @@ feed that comes right out of the box. This system is still in beta. Built on Nod
 
 
 # Minor Improvements Needed #
-1. ~~Link to specified location page from feed and catch page~~ Completed
+1. ~~Link to specified location page from feed and catch page...~~ Completed
 2. Finish change email function
 
 # Requirements #
@@ -24,7 +24,11 @@ feed that comes right out of the box. This system is still in beta. Built on Nod
 1. When using MongoDB 3.6, the catch won't be added to specified location. MongoDB 3.4 is recommended at this time.
 
 # Installation #
-1. Register for Google ReCAPTCHA and add desired domain (if localhost, use localhost)
-2. Add reCAPTCHA key to App.js
+1. Register for Google ReCAPTCHA and add desired domain (if localhost, localhost URL as well)
+2. Navigate to ReCAPTCHA section in `App.js` and fill in with key provided from Step 1.
 2. Navigate to `// Setup Express Session` and edit `ADD YOUR KEY` to your desired secret key
 3. Run `npm install`
+4. Navigate to `localhost:3000` and register an account
+5. Open MongoDB console and find created account
+6. Change `isAdmin: false` and change to `isAdmin: true`
+7. You have finished installation!
