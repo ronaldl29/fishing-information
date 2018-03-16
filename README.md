@@ -3,7 +3,7 @@ A social network and content management system hybrid for building a local fishi
 feed that comes right out of the box. This system is still in beta. Built on Node.js and MongoDB. Uses a customized version of Bulma CSS for stylesheets.
 
 # To-Do List #
-1. Remove font awesome dependency and switch to SVG icons... 10%
+1. ~~Remove font awesome dependency and switch to SVG icons...~~ Completed
 2. Create admin panel... 5%
 3. Clean up CSS for faster pageload... Not yet started
 4. Change name of "Catch" model to fix reserved name issue... Not yet started
@@ -13,7 +13,7 @@ feed that comes right out of the box. This system is still in beta. Built on Nod
 
 
 # Minor Improvements Needed #
-1. Link to specified location page from feed and catch page
+1. ~~Link to specified location page from feed and catch page~~ Completed
 2. Finish change email function
 
 # Requirements #
