@@ -1,2 +1,2 @@
-public/* linguist-vendored
-views/* lignuist-vendored
+* linguist-vendored
+*.js linguist-vendored=false
