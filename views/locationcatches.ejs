@@ -49,7 +49,24 @@
                       <div class="content">
                         <%= posts[i].description %>
                         <br>
-                        <time><img src="/icons/calendar.svg" class="svg-icon-small"><%= posts[i].createdAt.toDateString() %></time><br>
+                        <%
+                        var msInDay = 1000*60*60*24;
+                        var currentDate = new Date(Date.now())
+                        function dateDiff(postedDate, currentDate){
+                          let utc1 = Date.UTC(postedDate.getFullYear(), postedDate.getMonth(),postedDate.getDate());
+                          let utc2 = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(),currentDate.getDate());
+                          return Math.floor((utc2 - utc1) / msInDay);
+                        } %>
+                        <% if(dateDiff(posts[i].createdAt, currentDate) === 0){ %>
+                          <p style="color: black; "><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"> Today</p>
+                        <% } %>
+                        <% if(dateDiff(posts[i].createdAt, currentDate) === 1){ %>
+                          <p style="color: black"><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"> Yesterday</p>
+                        <% } %>
+                        <% if(dateDiff(posts[i].createdAt, currentDate) > 1){ %>
+                          <p style="color: black;"><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"><%= dateDiff(posts[i].createdAt, currentDate) %> days ago</p>
+                        <% } %>
+                        <br>
 	                      <% if(currentUser && posts[i].author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
                           <div style="text-align: center">
                             <a class="button is-small is-warning" href="/locations/<%= posts[i].catchlocationid %>/catch/<%= posts[i]._id %>/edit">

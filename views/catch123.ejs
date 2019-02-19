@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Fish Caught Near Bakersfield</title>
+    <title>fishingBakersfield | Feed</title>
 <% include partials/header %>
 <% include partials/loginbar %>
 <% include partials/message %>
     <div class="container">
+      <!-- TAB -->
+      <div class="tabs is-centered">
+        <ul>
+          <li class="is-active">
+            <a href="/catches/1">
+              <span class="icon is-medium"><i class="fas fa-rss"></i></span>
+              <span>Feed</span>
+            </a>
+          </li>
+          <li>
+            <a href="/locations">
+              <span class="icon is-medium"><i class="fas fa-map-marker"></i></span>
+              <span>Locations</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- END TAB -->
       <div class="box">
-	       <p style="font-size: 27px"><img src="/icons/feed.svg" class="svg-icon-md"> Fish Caught Near Bakersfield:</p>
-         <hr>
          <!-- CATCH CARDS -->
          <div class="masonry">
            <% for (var i = 0; i < posts.length; i++) { %>
@@ -22,23 +38,36 @@
                      <div class="card-content">
                        <div class="media">
                          <div class="media-content">
-                           <p class="title is-4"><img src="/icons/user.svg" class="svg-icon-20"><%= posts[i].author.username %></p>
-                           <p class="subtitle is-6"><a style="color: black;" href="/locations/<%= posts[i].catchlocationid %>">
-                             <img src="/icons/map-sign.svg" class="svg-icon-small">&nbsp;<%= posts[i].catchlocation %></a>
+                           <p class="title is-5"><a href="/locations/<%= posts[i].catchlocationid %>">
+                             <i class="fas fa-map-marker"></i>&nbsp;<%= posts[i].catchlocation %></a>
                            </p>
+                           <p class="subtitle is-6" style="color: black"><i class="fas fa-user"></i>&nbsp;<%= posts[i].author.username %>
+                             <span style="float: right"><i class="fas fa-clock"></i>
+                               <%
+                               var msInDay = 1000*60*60*24;
+                               var currentDate = new Date(Date.now())
+                               function dateDiff(postedDate, currentDate){
+                                 let utc1 = Date.UTC(postedDate.getFullYear(), postedDate.getMonth(),postedDate.getDate());
+                                 let utc2 = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(),currentDate.getDate());
+                                 return Math.floor((utc2 - utc1) / msInDay);
+                               } %>
+                               <% if(dateDiff(posts[i].createdAt, currentDate) === 0){ %>
+                                 Today
+                               <% } %>
+                               <% if(dateDiff(posts[i].createdAt, currentDate) === 1){ %>
+                                 Yesterday
+                               <% } %>
+                               <% if(dateDiff(posts[i].createdAt, currentDate) > 1){ %>
+                                 <%= dateDiff(posts[i].createdAt, currentDate) %> days ago
+                               <% } %>
+                            </span></p>
                          </div>
                        </div>
+                       <hr>
                        <div class="content">
-                         <%= posts[i].description %>
-                         <br>
-                         <time><img src="/icons/calendar.svg" class="svg-icon-small"><%= posts[i].createdAt.toDateString() %></time>
+                         <p style="color: black"><%= posts[i].description %></p>
                        </div>
                      </div>
-							       <footer class="card-footer">
-                       <a class="card-footer-item" href="/catch/<%= posts[i]._id %>">
-                         <img src="/icons/anchor.svg" class="svg-icon-small">&nbsp;<p style="color: black;">Open</p>
-                       </a>
-                     </footer>
                    </div>
                  </div>
                  <br>

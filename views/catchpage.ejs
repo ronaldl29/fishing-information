@@ -19,7 +19,25 @@
                   <p><img src="/icons/map-sign.svg" class="svg-icon-small">
                     <a style="color: black;" href="/locations/<%= post.catchlocationid %>"><%= post.catchlocation %></a>
                   </p>
-                  <time><img src="/icons/calendar.svg" class="svg-icon-small"><%= post.createdAt.toDateString() %></time>
+                  <time>
+                    <%
+                    var msInDay = 1000*60*60*24;
+                    var currentDate = new Date(Date.now())
+                    function dateDiff(postedDate, currentDate){
+                      let utc1 = Date.UTC(postedDate.getFullYear(), postedDate.getMonth(),postedDate.getDate());
+                      let utc2 = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(),currentDate.getDate());
+                      return Math.floor((utc2 - utc1) / msInDay);
+                    } %>
+                    <% if(dateDiff(post.createdAt, currentDate) === 0){ %>
+                      <p style="color: black"><img src="/icons/calendar.svg" style="margin-right: 6px;" class="svg-icon-small"> Today</p>
+                    <% } %>
+                    <% if(dateDiff(post.createdAt, currentDate) === 1){ %>
+                      <p style="color: black"><img src="/icons/calendar.svg" style="margin-right: 6px;" class="svg-icon-small"> Yesterday</p>
+                    <% } %>
+                    <% if(dateDiff(post.createdAt, currentDate) > 1){ %>
+                      <p style="color: black"><img src="/icons/calendar.svg" style="margin-right: 6px;" class="svg-icon-small"><%= dateDiff(post.createdAt, currentDate) %> days ago</p>
+                    <% } %>
+                  </time>
                   <br>
                   <br>
                   <div class="content">
@@ -46,4 +64,7 @@
 	        <br>
 	        <br>
 </div>
+<script>
+
+</script>
 <% include partials/footer %>

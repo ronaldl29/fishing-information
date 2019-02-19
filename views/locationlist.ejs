@@ -1,21 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bakersfield Fishing Locations</title>
+    <title>fishingBakersfield | Locations</title>
     <% include partials/header %>
     <% include partials/loginbar %>
       <div class="container">
         <% include partials/message %>
+        <!-- TAB -->
+        <div class="tabs is-centered">
+          <ul>
+            <li>
+              <a href="/catches/1">
+                <span class="icon is-medium"><i class="fas fa-rss"></i></span>
+                <span>Feed</span>
+              </a>
+            </li>
+            <li class="is-active">
+              <a href="/locations">
+                <span class="icon is-medium"><i class="fas fa-map-marker"></i></span>
+                <span>Locations</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- END TAB -->
         <!-- COLUMN TILES -->
         <div class="columns is-multiline is-centered">
           <% location.forEach(function(location){ %>
             <div class="column is-6 is-pulled-left">
               <div class="box">
                 <!-- LOCATION NAME -->
-                <p><img src="/icons/map-sign.svg" class="svg-icon-small">
+                <p><i class="fas fa-map-marker">&nbsp;</i>
                   <strong><%= location.name %></strong></p>
                 <!-- CATCH NUMBER -->
-                <p><img src="/icons/tags.svg" class="svg-icon-small">
+                <p><i class="fas fa-tags">&nbsp;</i>
 	                 <% if(location.catches.length == 0){ %>
 	                    <em>No catches</em>
 	                 <% } %>

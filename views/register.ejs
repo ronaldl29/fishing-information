@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Register - fishingBakersfield</title>
+    <title>Register</title>
 <% include partials/header %>
 <div class="block">
       <div class="notification is-info">
@@ -13,7 +13,7 @@
 <div id="errorCMsg" style="display: none">
   <article class="message is-warning" id="delete" style="margin-bottom: 1.5rem;">
     <div class="message-header">
-      <p><i class="fa fa-exclamation-triangle">&nbsp;</i>Error</p>
+      <p style="font-size: 19px"><img src="/icons/notice.svg" class="svg-icon-small" />Error</p>
       <button class="delete" onclick="hideMsg()" aria-label="delete"></button>
     </div>
     <div class="message-body">
@@ -33,7 +33,7 @@
               <div class="control has-icons-left">
                 <input class="input" type="email" style="width: 300px" placeholder="youremail@gmail.com" name="email" maxlength="40" required>
 		<span class="icon is-left">
-		<i class="fa fa-envelope"></i>
+		<img src="/icons/email2.svg" class="svg-icon-small" />
 		</span>
               </div>
         </div>
@@ -42,7 +42,7 @@
               <div class="control has-icons-left">
                 <input class="input" type="text" style="width: 300px" placeholder="Username" name="username" maxlength="15" required>
 		<span class="icon is-left">
-		<i class="fa fa-user"></i>
+		<img src="/icons/user.svg" class="svg-icon-small" />
 		</span>
               </div>
         </div>
@@ -51,7 +51,7 @@
               <div class="control has-icons-left">
                 <input class="input" type="password" style="width: 300px" placeholder="Password" name="password" maxlength="30" required>
 		<span class="icon is-left">
-		<i class="fa fa-lock"></i>
+		<img src="/icons/lock.svg" class="svg-icon-small" />
 		</span>
               </div>
         </div>
@@ -64,7 +64,7 @@
             </label>
           </div>
         </div>
-        <button onclick="return validateCaptcha()" class="button is-link"><i class="fa fa-user-plus">&nbsp;</i>Register</button>
+        <button onclick="return validateCaptcha()" class="button is-link"><img src="/icons/user-plus-white.svg" class="svg-icon-small" />Register</button>
     </form>
     </div>
     </article>

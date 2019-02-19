@@ -14,7 +14,7 @@ var express               = require("express"),
     compress_images = require('compress-images');
 
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost/fishingsocial");
+mongoose.connect("mongodb://localhost/fishbak");
 
 // Flash Messages
 app.use(flash());

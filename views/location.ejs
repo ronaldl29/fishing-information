@@ -71,13 +71,30 @@
                     <div class="card-content">
                       <div class="media">
                         <div class="media-left">
-                          <p class="title is-4"><img src="/icons/user.svg" class="svg-icon-20"><strong><%= location.catches[0].author.username %></strong></p>
-                          <p class="subtitle is-6"><em><%= location.catches[0].species %></em></p>
+                          <p class="title is-4" style="color: black"><img src="/icons/user.svg" class="svg-icon-20"><strong><%= location.catches[0].author.username %></strong></p>
+                          <p class="subtitle is-6" style="color: black"><em><%= location.catches[0].species %></em></p>
                         </div>
                       </div>
                       <div class="content">
-                        <p><%= location.catches[0].description %></p>
-                        <p class="subtitle is-6"><img src="/icons/calendar.svg" class="svg-icon-small"><%= location.catches[0].createdAt.toDateString() %></p>
+                        <p style="color: black"><%= location.catches[0].description %></p>
+                        <%
+                        var msInDay = 1000*60*60*24;
+                        var currentDate = new Date(Date.now())
+                        function dateDiff(postedDate, currentDate){
+                          let utc1 = Date.UTC(postedDate.getFullYear(), postedDate.getMonth(),postedDate.getDate());
+                          let utc2 = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(),currentDate.getDate());
+                          return Math.floor((utc2 - utc1) / msInDay);
+                        } %>
+                        <% if(dateDiff(location.catches[0].createdAt, currentDate) === 0){ %>
+                          <p style="color: black; "><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"> Today</p>
+                        <% } %>
+                        <% if(dateDiff(location.catches[0].createdAt, currentDate) === 1){ %>
+                          <p style="color: black"><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"> Yesterday</p>
+                        <% } %>
+                        <% if(dateDiff(location.catches[0].createdAt, currentDate) > 1){ %>
+                          <p style="color: black;"><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"><%= dateDiff(location.catches[0].createdAt, currentDate) %> days ago</p>
+                        <% } %>
+                      </p>
                         <div>
                           <% if(currentUser && location.catches[0].author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
                           <div style="text-align: center;">
@@ -111,17 +128,31 @@
                     <div class="card-content">
                       <div class="media">
                         <div class="media-left">
-                          <p class="title is-4"><img src="/icons/user.svg" class="svg-icon-20">
+                          <p style="color: black" class="title is-4"><img src="/icons/user.svg" class="svg-icon-20">
                             <strong><%= location.catches[0].author.username %></strong>
                           </p>
-                          <p class="subtitle is-6"><em><%= location.catches[0].species %></em></p>
+                          <p style="color: black" class="subtitle is-6"><em><%= location.catches[0].species %></em></p>
                         </div>
                       </div>
                       <div class="content">
-                        <p><%= location.catches[0].description %></p>
-                        <p class="subtitle is-6"><img src="/icons/calendar.svg" class="svg-icon-small">
-                          <%= location.catches[0].createdAt.toDateString() %>
-                        </p>
+                        <p style="color: black"><%= location.catches[0].description %></p>
+                        <%
+                        var msInDay = 1000*60*60*24;
+                        var currentDate = new Date(Date.now())
+                        function dateDiff(postedDate, currentDate){
+                          let utc1 = Date.UTC(postedDate.getFullYear(), postedDate.getMonth(),postedDate.getDate());
+                          let utc2 = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(),currentDate.getDate());
+                          return Math.floor((utc2 - utc1) / msInDay);
+                        } %>
+                        <% if(dateDiff(location.catches[0].createdAt, currentDate) === 0){ %>
+                          <p style="color: black; "><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"> Today</p>
+                        <% } %>
+                        <% if(dateDiff(location.catches[0].createdAt, currentDate) === 1){ %>
+                          <p style="color: black"><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"> Yesterday</p>
+                        <% } %>
+                        <% if(dateDiff(location.catches[0].createdAt, currentDate) > 1){ %>
+                          <p style="color: black;"><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"><%= dateDiff(location.catches[0].createdAt, currentDate) %> days ago</p>
+                        <% } %>
                         <div>
                           <% if(currentUser && location.catches[0].author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
                             <div style="text-align: center">
@@ -153,13 +184,29 @@
                   <div class="card-content">
                     <div class="media">
                       <div class="media-left">
-                        <p class="title is-4"><img src="/icons/user.svg" class="svg-icon-20"><strong><%= location.catches[1].author.username %></strong></p>
-                        <p class="subtitle is-6"><em><%= location.catches[1].species %></em></p>
+                        <p style="color: black" class="title is-4"><img src="/icons/user.svg" class="svg-icon-20"><strong><%= location.catches[1].author.username %></strong></p>
+                        <p style="color: black" class="subtitle is-6"><em><%= location.catches[1].species %></em></p>
                       </div>
                     </div>
                     <div class="content">
-                      <p><%= location.catches[1].description %></p>
-                      <p class="subtitle is-6"><img src="/icons/calendar.svg" class="svg-icon-small"><%= location.catches[1].createdAt.toDateString() %></p>
+                      <p style="color: black"><%= location.catches[1].description %></p>
+                      <%
+                      var msInDay = 1000*60*60*24;
+                      var currentDate = new Date(Date.now())
+                      function dateDiff(postedDate, currentDate){
+                        let utc1 = Date.UTC(postedDate.getFullYear(), postedDate.getMonth(),postedDate.getDate());
+                        let utc2 = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(),currentDate.getDate());
+                        return Math.floor((utc2 - utc1) / msInDay);
+                      } %>
+                      <% if(dateDiff(location.catches[1].createdAt, currentDate) === 0){ %>
+                        <p style="color: black; "><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"> Today</p>
+                      <% } %>
+                      <% if(dateDiff(location.catches[1].createdAt, currentDate) === 1){ %>
+                        <p style="color: black"><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"> Yesterday</p>
+                      <% } %>
+                      <% if(dateDiff(location.catches[1].createdAt, currentDate) > 1){ %>
+                        <p style="color: black;"><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"><%= dateDiff(location.catches[1].createdAt, currentDate) %> days ago</p>
+                      <% } %>
                       <div>
                         <% if(currentUser && location.catches[1].author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
                           <div style="text-align: center">
