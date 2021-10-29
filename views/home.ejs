@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home - fishingBakersfield</title>
-<% include partials/header %>
+    <title>Fishing Bakersfield | Home</title>
+<%- include('partials/header') %>
 <% if(!currentUser){ %>
 <br>
 <div class="block">
@@ -14,7 +14,7 @@
 <% } else { %>
 <br><br>
 <% } %>
-<% include partials/message %>
+<%- include('partials/message') %>
 
 
 
@@ -52,4 +52,4 @@
 </div>
 </div>
 
-<% include partials/footer %>
+<%- include('partials/footer') %>

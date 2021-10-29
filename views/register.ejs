@@ -2,14 +2,15 @@
 <html>
 <head>
     <title>Register</title>
-<% include partials/header %>
+<%- include('partials/header') %>
 <div class="block">
       <div class="notification is-info">
         <p>Registering an account allows you to post your catches and share fishing tips with other anglers!</p>
       </div>
 </div>
+<br>
 <div class="container">
-<% include partials/message %>
+<%- include('partials/message') %>
 <div id="errorCMsg" style="display: none">
   <article class="message is-warning" id="delete" style="margin-bottom: 1.5rem;">
     <div class="message-header">
@@ -85,4 +86,4 @@ function validateCaptcha()
         return true;
 }
 </script>
-<% include partials/footer %>
+<%- include('partials/footer') %>

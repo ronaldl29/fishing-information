@@ -1,24 +1,17 @@
       <link rel="stylesheet" type="text/css" href="/css/bulma.css">
       <link rel="stylesheet" type="text/css" href="/css/styles.css">
       <!-- <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"> -->
-      <link rel="shortcut icon" type="image" href="/favicon.ico"/>
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
       <link href="https://fishingbakersfield.com" hreflang="en-us" rel="alternate" title="fishingBakersfield" type="text/html"/>
       <script src="/js/menu.js"></script>
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       <meta name="description" content="Find new places to fish and share what you've caught with other anglers all
            around Bakersfield and Kern County. We will help you catch fish at the Aqueduct, Lake Isabella, Kern River, and more!" />
-      <meta name="google-site-verification" content="6lhLBt7HB6f5HbmpWXU3YlHBDgM5Mhu4QKsvH7F5kQM" />
-      <!-- Global site tag (gtag.js) - Google Analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112861959-1"></script>
-      <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'UA-112861959-1');
-      </script>
-
+      <!-- Favicons -->
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
     <nav class="navbar is-dark">
@@ -34,13 +27,17 @@
         </div>
         <div id="navbarExampleTransparentExample" class="navbar-menu">
           <div class="navbar-start">
-            <a class="navbar-item" href="/"><i class="fas fa-home">&nbsp;</i>Feed</a>
             <a class="navbar-item" href="/locations"><i class="fas fa-map-marker">&nbsp;</i>Locations</a>
+            <a class="navbar-item" href="/catches/1"><i class="fas fa-comments">&nbsp;</i>Feed</a>
             <a class="navbar-item" href="/resources"><i class="fas fa-exchange-alt">&nbsp;</i>Links</a>
+            <% if(currentUser && currentUser.isAdmin){ %>
+              <a class="navbar-item" href="/admin"><i class="fas fa-user-shield">&nbsp;</i>Admin</a>
+            <% } %>
              </div>         <div class="navbar-end">
                <% if(currentUser){ %>
-                 <a class="navbar-item" href="/dashboard"><img src="/icons/user-circle-white.svg" class="svg-icon-small"> Hello, <%= currentUser.username %>!</a>
-                 <a class="navbar-item" href="/logout"><img src="/icons/times-white.svg" class="svg-icon-small" />Logout</a>
+                 <a class="navbar-item" href="/dashboard"><i class="fas fa-user-circle">&nbsp;</i>Hello, <%= currentUser.username %>!</a>
+                 <a class="navbar-item" href="/dashboard"><i class="fas fa-cogs">&nbsp;</i>Settings</a>
+                 <a class="navbar-item" href="/logout"><i class="fas fa-sign-out-alt">&nbsp;</i>Logout</a>
                 <% } else { }%>
         </div>
        </div>

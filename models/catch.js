@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var catchSchema = mongoose.Schema({
+const catchSchema = mongoose.Schema({
     species: String,
     weight: String,
     image: String,

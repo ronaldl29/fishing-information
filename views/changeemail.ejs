@@ -2,10 +2,10 @@
 <html>
 <head>
     <title>Change Email - fishingBakersfield</title>
-<% include partials/header %>
-<% include partials/loginbar %>
+<%- include('partials/header') %>
+<%- include('partials/loginbar') %>
 <div class="container">
-<% include partials/message %>
+<%- include('partials/message') %>
 <a class="button" href="/dashboard"><i class="fa fa-arrow-left">&nbsp;</i>Dashboard</a>
 <br>
 <br>
@@ -20,7 +20,7 @@
 
 
 
-    <form action="" method="POST" enctype='multipart/form-data'>
+    <form action="/update/user/email?_method=PUT" method="POST">
         <div class="field">
           <label class="label">Current Email</label>
               <div class="control">
@@ -30,10 +30,9 @@
         <div class="field">
           <label class="label">New Email</label>
               <div class="control">
-                <input class="input" type="text" placeholder="johnsmith@gmail.com" name="description">
+                <input class="input" type="text" placeholder="johnsmith@gmail.com" name="updatedEmailAdd">
               </div>
         </div>
-		<p>This functionality is coming soon!</p>
              <button id="button" class="button is-link">Submit</button>
     </form>
 
@@ -44,4 +43,4 @@
     
     
 </div>
-<% include partials/footer %>
+<%- include('partials/footer') %>

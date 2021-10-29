@@ -1,31 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>fishingBakersfield | Locations</title>
-    <% include partials/header %>
-    <% include partials/loginbar %>
+    <title>Fishing Bakersfield | Locations</title>
+    <%- include ('partials/header') %>
+    <%- include ('partials/loginbar') %>
+    <br>
       <div class="container">
-        <% include partials/message %>
-        <!-- TAB -->
-        <div class="tabs is-centered">
-          <ul>
-            <li>
-              <a href="/catches/1">
-                <span class="icon is-medium"><i class="fas fa-rss"></i></span>
-                <span>Feed</span>
-              </a>
-            </li>
-            <li class="is-active">
-              <a href="/locations">
-                <span class="icon is-medium"><i class="fas fa-map-marker"></i></span>
-                <span>Locations</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <!-- END TAB -->
+        <%- include ('partials/message') %>
         <!-- COLUMN TILES -->
         <div class="columns is-multiline is-centered">
+          <div class="column is-12">
+            <div class="box">
+              <div style="text-align: center;">
+                <h1><strong>Top Fishing Locations Near Bakersfield</strong></h1>
+              </div>
+            </div>
+          </div>
           <% location.forEach(function(location){ %>
             <div class="column is-6 is-pulled-left">
               <div class="box">
@@ -76,4 +66,4 @@
          </a>
        <% } %>
      </div>
-<% include partials/footer %>
+<%- include('partials/footer') %>

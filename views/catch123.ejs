@@ -2,28 +2,11 @@
 <html>
 <head>
     <title>fishingBakersfield | Feed</title>
-<% include partials/header %>
-<% include partials/loginbar %>
-<% include partials/message %>
+<%- include('partials/header') %>
+<%- include('partials/loginbar') %>
+<%- include('partials/message') %>
+<br>
     <div class="container">
-      <!-- TAB -->
-      <div class="tabs is-centered">
-        <ul>
-          <li class="is-active">
-            <a href="/catches/1">
-              <span class="icon is-medium"><i class="fas fa-rss"></i></span>
-              <span>Feed</span>
-            </a>
-          </li>
-          <li>
-            <a href="/locations">
-              <span class="icon is-medium"><i class="fas fa-map-marker"></i></span>
-              <span>Locations</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-      <!-- END TAB -->
       <div class="box">
          <!-- CATCH CARDS -->
          <div class="masonry">
@@ -61,6 +44,13 @@
                                  <%= dateDiff(posts[i].createdAt, currentDate) %> days ago
                                <% } %>
                             </span></p>
+                            <% if(currentUser && currentUser.isAdmin){ %>
+                              <form class="sameLine" action="/locations/<%= posts[i].catchlocationid %>/catch/<%= posts[i]._id %>?_method=DELETE" method="POST">
+                                <button class="button is-small is-danger">
+                                  Delete
+                                </button>
+                              </form>
+                            <% } %>
                          </div>
                        </div>
                        <hr>
@@ -121,4 +111,4 @@
         </nav>
         <% } %>
       </div>
-<% include partials/footer %>
+<%- include('partials/footer') %>

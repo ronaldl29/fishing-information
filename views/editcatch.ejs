@@ -2,13 +2,13 @@
 <html>
 <head>
     <title>Edit My Catch - fishingBakersfield</title>
-<% include partials/header %>
+<%- include('partials/header') %>
 <div class="block">
       <div class="notification is-info">
         <p>Made a mistake? No worries, you can fix it here.</p>
       </div>
 </div>
-<% include partials/message %>
+<%- include('partials/message') %>
 <div class="container">
         <article class="message is-info">
             <div class="message-header">
@@ -21,7 +21,7 @@
 
 
 
-    <form action="/locations/<%= locationID %>/catch/<%= post._id %>?_method=PUT" method="POST">
+    <form action="/locations/<%= post._id %>/catch/<%= post._id %>?_method=PUT" method="POST">
         <div class="field">
           <label class="label">Picture</label>
               <div class="control">
@@ -50,4 +50,4 @@
 
 
 </div>
-<% include partials/footer %>
+<%- include('partials/footer') %>

@@ -2,10 +2,10 @@
 <html>
   <head>
     <title><%= post.author.username %>'s Catch</title>
-    <% include partials/header %>
-    <% include partials/loginbar %>
+    <%- include('partials/header') %>
+    <%- include('partials/loginbar') %>
       <div class="container">
-        <% include partials/message %>
+        <%- include('partials/message') %>
           <div class="box">
             <div class="columns">
               <div class="column is-6">
@@ -67,4 +67,4 @@
 <script>
 
 </script>
-<% include partials/footer %>
+<%- include('partials/footer') %>
