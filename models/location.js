@@ -1,10 +1,10 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var locationSchema = new mongoose.Schema({
+const locationSchema = new mongoose.Schema({
     name: String,
     gps: String,
-    image: String,
     thumbnail: String,
+    image: String,
     description: String,
     catches: [
         {

@@ -2,9 +2,9 @@
 <html>
 <head>
     <title>Edit Location - fishingBakersfield</title>
-<% include partials/header %>
+<%- include('partials/header') %>
 <br />
-<% include partials/message %>
+<%- include('partials/message') %>
 <div class="container">
     <p>Edit <%= location.name %></p>
     <form action="/locations/<%= location._id %>?_method=PUT" method="POST">
@@ -41,4 +41,4 @@
         <button id="button" class="button is-link">Update Location</button>
     </form>
 </div>
-<% include partials/footer %>
+<%- include('partials/footer') %>

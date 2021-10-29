@@ -2,12 +2,42 @@
 <html>
 <head>
     <title>Admin Page - fishingBakersfield</title>
-<% include partials/header %>
+<%- include('partials/header') %>
 <br>
-<% include partials/message %>
 <div class="container">
-    <% users.forEach(function(user){ %>
-      <p><%= user.username %></p>
-      <% }) %>
+  <%- include('partials/message') %>
+    <div class="box">
+        <p style="font-size: 27px; color: black">Total Users: <%= users.length %></p>
+        <hr>
+        <div class="masonry">
+            <% users.forEach(function(user){ %>
+                  <div class="item">
+                      <div class="card">
+                    <div class="card-header">
+                    </div>
+                    <div class="card-content">
+                      <div class="media">
+                        <div class="media-content">
+                          <p class="subtitle is-6" style="color: black"><i class="fas fa-user"></i>&nbsp;<%= user.username %></p>
+                          <p class="subtitle is-6" style="color: black"><i class="fas fa-envelope"></i> <%= user.email %></p>
+                          <% if(user.isAdmin){ %>
+                            <p class="subtitle is-6" style="color: black"><i class="fa fa-users"></i> Admin</p>
+                          <% } else { %>
+                          <p class="subtitle is-6" style="color: black"><i class="fa fa-users"></i> User</p>
+                          <% } %>
+                          <form action="/users/<%= user._id %>?_method=DELETE" method="POST">
+                            <button class="button is-small is-danger">
+                              <i class="fas fa-trash">&nbsp;</i> Delete
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br>
+          <% }) %>
+       </div>
+     </div>
 </div>
-<% include partials/footer %>
+<%- include('partials/footer') %>
