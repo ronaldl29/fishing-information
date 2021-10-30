@@ -28,7 +28,7 @@ app.use(flash());
 
 // Setup ReCaptcha Middleware
 const opts =
-  { secretKey: '6Lej8z4UAAAAAG8ssRhSVPc7eM3fSMK5JBoV0JTY'
+  { secretKey: process.env.RECAPTCHA_SECRET_KEY
   , errors:
     { validation: function () { return new Error('Captcha must be filled out.') }
     , missingBody: function () { return new Error('Missing body response from recaptcha') }
