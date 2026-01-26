@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const catchSchema = mongoose.Schema({
     species: String,
@@ -11,7 +11,7 @@ const catchSchema = mongoose.Schema({
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
+            ref: 'User'
         },
         username: String
     }
@@ -19,4 +19,4 @@ const catchSchema = mongoose.Schema({
    {timestamps: true}
 );
 
-module.exports = mongoose.model("Catch", catchSchema);
+module.exports = mongoose.model('Catch', catchSchema);

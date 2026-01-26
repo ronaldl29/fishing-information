@@ -1,18 +1,18 @@
 require('dotenv').config();
 
-const express             = require("express"),
+const express             = require('express'),
     app                   = express(),
-    mongoose              = require("mongoose"),
-    passport              = require("passport"),
-    flash                 = require("connect-flash"),
-    LocalStrategy         = require("passport-local"),
-    passportLocalMongoose = require("passport-local-mongoose"),
-    methodOverride        = require("method-override"),
-    Catch                 = require("./models/catch"),
+    mongoose              = require('mongoose'),
+    passport              = require('passport'),
+    flash                 = require('connect-flash'),
+    LocalStrategy         = require('passport-local'),
+    passportLocalMongoose = require('passport-local-mongoose'),
+    methodOverride        = require('method-override'),
+    Catch                 = require('./models/catch'),
     Location              = require('./models/location'),
-    User                  = require("./models/user"),
-    multer                = require("multer"),
-    path                  = require("path"),
+    User                  = require('./models/user'),
+    multer                = require('multer'),
+    path                  = require('path'),
     mongoSanitize         = require('express-mongo-sanitize'),
     helmet                = require('helmet');
 
@@ -21,7 +21,7 @@ app.use(mongoSanitize());
 app.use(helmet({contentSecurityPolicy: false}));
 
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost/fishbak", { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false });
+mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false });
 
 // Flash Messages
 app.use(flash());
@@ -38,10 +38,10 @@ const opts =
       }
     }
  }
-var sentCaptcha = require('recaptcha-middleware')(opts);
+let sentCaptcha = require('recaptcha-middleware')(opts);
 
 // Setup Express Session
-app.use(require("express-session")({
+app.use(require('express-session')({
     secret: process.env.EXPRESS_SESSION_KEY,
     resave: false,
     saveUninitialized: false
@@ -51,13 +51,13 @@ passport.deserializeUser(User.deserializeUser());
 passport.use(new LocalStrategy(User.authenticate()));
 
 // App Config
-app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride("_method"));
+app.use(methodOverride('_method'));
 
 // Multer Setup
 const storage = multer.diskStorage({
@@ -75,44 +75,44 @@ const upload = multer({ storage : storage}).single('image');
 // Add user data globally
 app.use(function(req, res, next){
    res.locals.currentUser = req.user;
-   res.locals.error     = req.flash("error");
-   res.locals.success   = req.flash("success");
+   res.locals.error     = req.flash('error');
+   res.locals.success   = req.flash('success');
    next();
 });
 
 // Home
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   res.redirect("/locations");
 });
 
-app.get("/locations", (req, res) => {
+app.get('/locations', (req, res) => {
     Location.find({}, function(err, allLocations){
         if(err){
-            res.send("Oops we hit a snag.");
+            res.send('Oops we hit a snag.');
         } else {
-            res.render("locationlist", {location: allLocations});
+            res.render('locationlist', {location: allLocations});
         }
     })
 });
 
 // Location Selector
-app.get("/addcatch", async (req, res) => {
+app.get('/addcatch', async (req, res) => {
     try {
         const locations = await Location.find();
-        return res.render("locationselector", {locations});
+        return res.render('locationselector', {locations});
     } catch (error) {
         return res.send('Oops we hit a snag.');
     }
 });
 
 // Catch Feed
-app.get("/catches", (req, res) => {
-    return res.redirect("/catches/1");
+app.get('/catches', (req, res) => {
+    return res.redirect('/catches/1');
 });
 
 // User Dashboard
-app.get("/dashboard", isLoggedIn, (req, res) => {
-    return res.render("dashboard")
+app.get('/dashboard', isLoggedIn, (req, res) => {
+    return res.render('dashboard')
 });
 
 // Update Email
@@ -137,7 +137,7 @@ app.get('/catches/:page', async (req, res) => {
         const perPage = 8;
         const page = req.params.page || 1;
 
-        const posts = await Catch.find({}).sort({"_id": -1}).skip((perPage * page) - perPage).limit(perPage);
+        const posts = await Catch.find({}).sort({'_id': -1}).skip((perPage * page) - perPage).limit(perPage);
 
         return res.render('catch123', {posts: posts, current: page, pages: Math.ceil(posts.length/perPage)});
     } catch (error) {
@@ -147,7 +147,7 @@ app.get('/catches/:page', async (req, res) => {
 });
 
 app.get('/locations/add', isLoggedIn, (req, res) => {
-    res.render("newlocation");
+    res.render('newlocation');
 });
 
 // Add location logic
@@ -187,7 +187,7 @@ app.put('/locations/:id', isLoggedIn, async (req, res) => {
 });
 
 // Delete Location
-app.delete("/locations/:id", async (req, res) => {
+app.delete('/locations/:id', async (req, res) => {
     try {
         await Location.findOneAndDelete({'_id': req.params.id});
         req.flash('success', 'Location successfully deleted.');
@@ -274,7 +274,7 @@ app.delete('/locations/:id/catch/:catchid', isUserPost, async (req, res) => {
 });
 
 // Register an account FORM
-app.get("/register", (req, res) => {
+app.get('/register', (req, res) => {
     return res.render("register");
 });
 
@@ -325,7 +325,7 @@ app.post('/login', usernameToLowerCase, passport.authenticate("local", {
  // Logout
  app.get('/logout', (req, res) => {
      req.logout();
-     req.flash("success", "You've been logged out. Come back soon!");
+     req.flash('success', 'You\'ve been logged out. Come back soon!');
      res.redirect("back");
  });
 
@@ -341,15 +341,15 @@ app.get('/locations/:id/catch/new', isLoggedIn, async (req, res) => {
 });
 
 // Catch Post LOGIC
-app.post("/locations/:id/catch", isLoggedIn, function(req, res){
+app.post('/locations/:id/catch', isLoggedIn, function(req, res){
     Location.findById(req.params.id, function(err, location){
         if(err){
             console.log(err);
-            res.redirect("/locations");
+            res.redirect('/locations');
         } else {
             upload(req, res, function(err){
                 if(err){
-                    return res.end("Upload unsuccessful");
+                    return res.end('Upload unsuccessful');
                 }
         var catchlocation = req.body.catchlocation;
         var catchlocationid = req.body.catchlocationid;
@@ -361,7 +361,7 @@ app.post("/locations/:id/catch", isLoggedIn, function(req, res){
 
         Catch.create(addCatch, function(err, post){
             if(err){
-                res.redirect("locations/:id/catch/new");
+                res.redirect('/locations/:id/catch/new');
             } else {
                 post.author.id = req.user._id;
                 post.author.username = req.user.username;
@@ -369,7 +369,7 @@ app.post("/locations/:id/catch", isLoggedIn, function(req, res){
                 location.catches.push(post);
                 location.save();
                 req.flash('success', 'Your catch has been added. Thank you!');
-                res.redirect("/locations/" + location._id + "/catches/");
+                res.redirect('/locations/' + location._id + '/catches/');
             }
         });
             });
@@ -378,36 +378,32 @@ app.post("/locations/:id/catch", isLoggedIn, function(req, res){
 });
 
 // Resources
-app.get("/resources", function(req, res){
-	res.render("resources");
-});
-
-app.get("/howdeepistruxtunlake", function(req, res){
-  res.render("truxtundepth");
+app.get('/resources', function(req, res){
+	res.render('resources');
 });
 
 // Delete User
-app.delete("/users/:userId", isAdmin, function(req, res){
+app.delete('/users/:userId', isAdmin, function(req, res){
     User.findByIdAndRemove(req.params.userId, function(err, post){
         if(err){
-            req.flash("error", err.toString());
+            req.flash('error', err.toString());
             res.redirect("back");
         }
-        req.flash("success", "User has been deleted.");
-        res.redirect("back");
+        req.flash('success', 'User has been deleted.');
+        res.redirect('back');
     });
 });
 
 // Not found page - KEEP LAST
-app.get("*", function(req, res){
-    res.render("notfound");
+app.get('*', function(req, res){
+    res.render('notfound');
 });
 
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
-    req.flash("error", "You must be logged in to do that.");
+    req.flash('error', 'You must be logged in to do that.');
     res.redirect("/login");
 }
 
@@ -421,31 +417,31 @@ function isUserPost(req, res, next){
     if(req.isAuthenticated()){
        Catch.findById(req.params.catchid, function(err, foundPost){
            if(err){
-               res.redirect("back");
+               res.redirect('back');
            } else {
                if(foundPost.author.id.equals(req.user._id) || req.user.isAdmin){
                    next();
                } else {
-                   req.flash("error", "You can't edit other angler's catches.");
+                   req.flash('error', 'You can\'t edit other angler\'s catches.');
                    res.redirect("back");
                }
            }
        });
     } else {
-        res.redirect("back");
+        res.redirect('back');
     }
 }
 
 function isAdmin(req, res, next){
     if(!req.user){
-        req.flash("error", "You must be an admin to access this page.");
-        return res.redirect("/login");   
+        req.flash('error', 'You must be an admin to access this page.');
+        return res.redirect('/login');   
     }
 
     if(req.user.isAdmin){
         next();
     } else {
-        req.flash("error", "You must be an admin to access this page.");
+        req.flash('error', 'You must be an admin to access this page.');
         return res.redirect("back");
     }
 }
@@ -453,5 +449,5 @@ function isAdmin(req, res, next){
 app.set('port',  (process.env.PORT || 5000));
 
 app.listen(5000, function(){
-   console.log(`fB is now running in ${process.env.NODE_ENV}!`);
+   console.log(`Fishing Information is now running in ${process.env.NODE_ENV}!`);
 });

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const locationSchema = new mongoose.Schema({
     name: String,
@@ -11,7 +11,7 @@ const locationSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Catch"
         }
-        ]
+    ]
 });
 
-module.exports = mongoose.model("Location", locationSchema);
+module.exports = mongoose.model('Location', locationSchema);
