@@ -2,10 +2,10 @@
 <html>
 <head>
     <title>Account Dashboard</title>
-<%- include('partials/header') %>
-<%- include('partials/loginbar') %>
+<%- include('../partials/header') %>
+<%- include('../partials/loginbar') %>
 <div class="container">
-<%- include('partials/message') %>
+<%- include('../partials/message') %>
     <div class="box">
         <div class="content">
             <p><img src="/icons/wave.svg" class="svg-icon-md">Hello, <%= currentUser.username %>! This is your account dashboard.</p>
@@ -14,8 +14,8 @@
     <div class="box">
         <div class="content">
             <h3><strong>Your Info:</strong></h3>
-            <p><img src="/icons/email.svg" class="svg-icon-small"> Email: <%= currentUser.email %> <sup><a href="/update/user/email">Edit</a></sup></p>
+            <p><img src="/icons/email.svg" class="svg-icon-small"> Email: <%= currentUser.email %> <sup><a href="/user/email">Edit</a></sup></p>
         </div>
     </div>
 </div>
-<%- include('partials/footer') %>
+<%- include('../partials/footer') %>

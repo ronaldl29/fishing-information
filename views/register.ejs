@@ -56,7 +56,6 @@
 		</span>
               </div>
         </div>
-	<div class="g-recaptcha" data-sitekey="6Lej8z4UAAAAAFC4JjpXnlYFmzL8Japa_Ao93Oij" name="g-recaptcha-response" id="rcaptcha"></div>
         <div class="field">
           <div class="control">
             <label class="checkbox">
@@ -71,19 +70,4 @@
     </article>
 </div>
 </div>
-<script src='https://www.google.com/recaptcha/api.js'></script>
-<script>
-function errorCMsg() {
-    document.getElementById('errorCMsg').style.display = '';
-}
-function validateCaptcha()
-{
-        if(grecaptcha.getResponse() === "")
-        {
-                errorCMsg();
-                return false;
-        }
-        return true;
-}
-</script>
 <%- include('partials/footer') %>

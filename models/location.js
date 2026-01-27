@@ -6,10 +6,10 @@ const locationSchema = new mongoose.Schema({
     thumbnail: String,
     image: String,
     description: String,
-    catches: [
+    posts: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Catch"
+            ref: "Post"
         }
     ]
 });

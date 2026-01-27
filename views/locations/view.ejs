@@ -2,10 +2,10 @@
 <html>
   <head>
     <title><%= location.name %> Fishing</title>
-    <%- include('partials/header') %>
-    <%- include('partials/loginbar') %>
+    <%- include('../partials/header') %>
+    <%- include('../partials/loginbar') %>
     <div class="container">
-      <%- include('partials/message') %>
+      <%- include('../partials/message') %>
       <!-- BACK BUTTON -->
       <a class="button" href="/"><img src="/icons/arrow-left.svg" class="svg-icon-small">
         All Locations
@@ -50,7 +50,7 @@
           </div>
         <% } %>
       </div>
-      <!-- CATCHES -->
+      <!-- Posts -->
 	    <div class="box">
         <p style="font-size: 12px">Sorted By: <img src="/icons/clock.svg" class="svg-icon-xs">Oldest</p>
         <br>
@@ -60,23 +60,23 @@
         </div>
           <br>
             <div class="columns is-multiline">
-              <% if(location.catches.length == 1){ %>
+              <% if(location.posts.length == 1){ %>
                 <div class="column is-6">
                   <div class="card">
                     <div class="card-image">
                       <figure class="image">
-                        <img src="<%= location.catches[0].image %>">
+                        <img src="<%= location.posts[0].image %>">
                       </figure>
                     </div>
                     <div class="card-content">
                       <div class="media">
                         <div class="media-left">
-                          <p class="title is-4" style="color: black"><img src="/icons/user.svg" class="svg-icon-20"><strong><%= location.catches[0].author.username %></strong></p>
-                          <p class="subtitle is-6" style="color: black"><em><%= location.catches[0].species %></em></p>
+                          <p class="title is-4" style="color: black"><img src="/icons/user.svg" class="svg-icon-20"><strong><%= location.posts[0].author.username %></strong></p>
+                          <p class="subtitle is-6" style="color: black"><em><%= location.posts[0].species %></em></p>
                         </div>
                       </div>
                       <div class="content">
-                        <p style="color: black"><%= location.catches[0].description %></p>
+                        <p style="color: black"><%= location.posts[0].description %></p>
                         <%
                         var msInDay = 1000*60*60*24;
                         var currentDate = new Date(Date.now())
@@ -85,23 +85,23 @@
                           let utc2 = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(),currentDate.getDate());
                           return Math.floor((utc2 - utc1) / msInDay);
                         } %>
-                        <% if(dateDiff(location.catches[0].createdAt, currentDate) === 0){ %>
+                        <% if(dateDiff(location.posts[0].createdAt, currentDate) === 0){ %>
                           <p style="color: black; "><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"> Today</p>
                         <% } %>
-                        <% if(dateDiff(location.catches[0].createdAt, currentDate) === 1){ %>
+                        <% if(dateDiff(location.posts[0].createdAt, currentDate) === 1){ %>
                           <p style="color: black"><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"> Yesterday</p>
                         <% } %>
-                        <% if(dateDiff(location.catches[0].createdAt, currentDate) > 1){ %>
-                          <p style="color: black;"><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"><%= dateDiff(location.catches[0].createdAt, currentDate) %> days ago</p>
+                        <% if(dateDiff(location.posts[0].createdAt, currentDate) > 1){ %>
+                          <p style="color: black;"><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"><%= dateDiff(location.posts[0].createdAt, currentDate) %> days ago</p>
                         <% } %>
                       </p>
                         <div>
-                          <% if(currentUser && location.catches[0].author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
+                          <% if(currentUser && location.posts[0].author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
                           <div style="text-align: center;">
-                            <a class="button is-small is-warning" href="/locations/<%= location._id %>/catch/<%= location.catches[0]._id %>/edit">
+                            <a class="button is-small is-warning" href="/locations/<%= location._id %>/catch/<%= location.posts[0]._id %>/edit">
                               <i class="fa fa-pencil-square-o">&nbsp;</i>Edit
                             </a>
-                            <form class="sameLine" action="/locations/<%= location._id %>/catch/<%= location.catches[0]._id %>?_method=DELETE" method="POST">
+                            <form class="sameLine" action="/locations/<%= location._id %>/catch/<%= location.posts[0]._id %>?_method=DELETE" method="POST">
                               <button class="button is-small is-danger">
                               <i class="fa fa-trash">&nbsp;</i>Delete</button>
                             </form>
@@ -110,32 +110,32 @@
                         </div>
                       </div>
                     </div>
-                    <a class="card-footer-item" href="/catch/<%= location.catches[0]._id %>">
+                    <a class="card-footer-item" href="/catch/<%= location.posts[0]._id %>">
                       <img src="/icons/anchor.svg" class="svg-icon-small">&nbsp;<p style="color: black;">Open</p>
                     </a>
                   </div>
                 </div>
               <% } %>
-              <% if(location.catches.length >= 2){ %>
+              <% if(location.posts.length >= 2){ %>
                 <!-- FIRST CARD -->
                 <div class="column is-6">
                   <div class="card">
                     <div class="card-image">
                       <figure class="image">
-                        <img src="<%= location.catches[0].image %>">
+                        <img src="<%= location.posts[0].image %>">
                       </figure>
                     </div>
                     <div class="card-content">
                       <div class="media">
                         <div class="media-left">
                           <p style="color: black" class="title is-4"><img src="/icons/user.svg" class="svg-icon-20">
-                            <strong><%= location.catches[0].author.username %></strong>
+                            <strong><%= location.posts[0].author.username %></strong>
                           </p>
-                          <p style="color: black" class="subtitle is-6"><em><%= location.catches[0].species %></em></p>
+                          <p style="color: black" class="subtitle is-6"><em><%= location.posts[0].species %></em></p>
                         </div>
                       </div>
                       <div class="content">
-                        <p style="color: black"><%= location.catches[0].description %></p>
+                        <p style="color: black"><%= location.posts[0].description %></p>
                         <%
                         var msInDay = 1000*60*60*24;
                         var currentDate = new Date(Date.now())
@@ -144,22 +144,22 @@
                           let utc2 = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(),currentDate.getDate());
                           return Math.floor((utc2 - utc1) / msInDay);
                         } %>
-                        <% if(dateDiff(location.catches[0].createdAt, currentDate) === 0){ %>
+                        <% if(dateDiff(location.posts[0].createdAt, currentDate) === 0){ %>
                           <p style="color: black; "><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"> Today</p>
                         <% } %>
-                        <% if(dateDiff(location.catches[0].createdAt, currentDate) === 1){ %>
+                        <% if(dateDiff(location.posts[0].createdAt, currentDate) === 1){ %>
                           <p style="color: black"><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"> Yesterday</p>
                         <% } %>
-                        <% if(dateDiff(location.catches[0].createdAt, currentDate) > 1){ %>
-                          <p style="color: black;"><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"><%= dateDiff(location.catches[0].createdAt, currentDate) %> days ago</p>
+                        <% if(dateDiff(location.posts[0].createdAt, currentDate) > 1){ %>
+                          <p style="color: black;"><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"><%= dateDiff(location.posts[0].createdAt, currentDate) %> days ago</p>
                         <% } %>
                         <div>
-                          <% if(currentUser && location.catches[0].author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
+                          <% if(currentUser && location.posts[0].author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
                             <div style="text-align: center">
-                              <a class="button is-small is-warning" href="/locations/<%= location._id %>/catch/<%= location.catches[0]._id %>/edit">
+                              <a class="button is-small is-warning" href="/locations/<%= location._id %>/catch/<%= location.posts[0]._id %>/edit">
                                 Edit
                               </a>
-                              <form class="sameLine" action="/locations/<%= location._id %>/catch/<%= location.catches[0]._id %>?_method=DELETE" method="POST">
+                              <form class="sameLine" action="/locations/<%= location._id %>/catch/<%= location.posts[0]._id %>?_method=DELETE" method="POST">
                                 <button class="button is-small is-danger">
                                 <i class="fa fa-trash">&nbsp;</i>Delete</button>
                               </form>
@@ -169,7 +169,7 @@
                       </div>
                     </div>
 							      <footer class="card-footer">
-							        <a class="card-footer-item" href="/catch/<%= location.catches[0]._id %>"><img src="/icons/anchor.svg" class="svg-icon-small">&nbsp;<p style="color: black;">Open</p></a>
+							        <a class="card-footer-item" href="/catch/<%= location.posts[0]._id %>"><img src="/icons/anchor.svg" class="svg-icon-small">&nbsp;<p style="color: black;">Open</p></a>
 							      </footer>
                 </div>
               </div>
@@ -178,18 +178,18 @@
                 <div class="card">
                   <div class="card-image">
                     <figure class="image">
-                      <img src="<%= location.catches[1].image %>">
+                      <img src="<%= location.posts[1].image %>">
                     </figure>
                   </div>
                   <div class="card-content">
                     <div class="media">
                       <div class="media-left">
-                        <p style="color: black" class="title is-4"><img src="/icons/user.svg" class="svg-icon-20"><strong><%= location.catches[1].author.username %></strong></p>
-                        <p style="color: black" class="subtitle is-6"><em><%= location.catches[1].species %></em></p>
+                        <p style="color: black" class="title is-4"><img src="/icons/user.svg" class="svg-icon-20"><strong><%= location.posts[1].author.username %></strong></p>
+                        <p style="color: black" class="subtitle is-6"><em><%= location.posts[1].species %></em></p>
                       </div>
                     </div>
                     <div class="content">
-                      <p style="color: black"><%= location.catches[1].description %></p>
+                      <p style="color: black"><%= location.posts[1].description %></p>
                       <%
                       var msInDay = 1000*60*60*24;
                       var currentDate = new Date(Date.now())
@@ -198,13 +198,13 @@
                         let utc2 = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(),currentDate.getDate());
                         return Math.floor((utc2 - utc1) / msInDay);
                       } %>
-                      <% if(dateDiff(location.catches[1].createdAt, currentDate) === 0){ %>
+                      <% if(dateDiff(location.posts[1].createdAt, currentDate) === 0){ %>
                         <p style="color: black; "><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"> Today</p>
                       <% } %>
-                      <% if(dateDiff(location.catches[1].createdAt, currentDate) === 1){ %>
+                      <% if(dateDiff(location.posts[1].createdAt, currentDate) === 1){ %>
                         <p style="color: black"><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"> Yesterday</p>
                       <% } %>
-                      <% if(dateDiff(location.catches[1].createdAt, currentDate) > 1){ %>
+                      <% if(dateDiff(location.posts[1].createdAt, currentDate) > 1){ %>
                         <p style="color: black;"><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"><%= dateDiff(location.catches[1].createdAt, currentDate) %> days ago</p>
                       <% } %>
                       <div>
@@ -224,22 +224,22 @@
                   </div>
                 </div>
 							 <footer class="card-footer">
-							   <a class="card-footer-item" href="/catch/<%= location.catches[1]._id %>"><img src="/icons/anchor.svg" class="svg-icon-small">&nbsp;<p style="color: black;">Open</p></a>
+							   <a class="card-footer-item" href="/catch/<%= location.posts[1]._id %>"><img src="/icons/anchor.svg" class="svg-icon-small">&nbsp;<p style="color: black;">Open</p></a>
 							 </footer>
             </div>
           </div>
         <% } %>
       </div>
      <!-- IF NO CATCHES DISPLAY MESSAGE -->
-     <% if(location.catches.length < 1 || undefined){ %>
+     <% if(location.posts.length < 1 || undefined){ %>
        <p style="text-align: center;">No one has posted a catch here yet!</p>
      <% } %>
 		 <div style="text-align: center">
     <!-- VIEW ALL BUTTON -->
-		 <% if(location.catches.length > 2){ %>
-       <a style="width: 93%;" class="button" href="/locations/<%= location._id %>/catches"><img src="/icons/archive.svg" class="svg-icon-small">View All (<%= location.catches.length %>)</a>
+		 <% if(location.posts.length > 2){ %>
+       <a style="width: 93%;" class="button" href="/locations/<%= location._id %>/catches"><img src="/icons/archive.svg" class="svg-icon-small">View All (<%= location.posts.length %>)</a>
     <% } %>
 	</div>
   </div>
 </div>
-<%- include('partials/footer') %>
+<%- include('../partials/footer') %>

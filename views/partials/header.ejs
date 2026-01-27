@@ -17,7 +17,7 @@
     <nav class="navbar is-dark">
         <div class="navbar-brand">
           <a class="navbar-item" href="/">
-            <p><img src="/logo.png">&nbsp;<p>fishing<strong>Bakersfield</strong></p>
+            <p><img src="/logo.png">&nbsp;<p>fishing<strong>Information</strong></p>
           </a>
           <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
             <span></span>
@@ -30,16 +30,17 @@
             <a class="navbar-item" href="/locations"><i class="fas fa-map-marker">&nbsp;</i>Locations</a>
             <a class="navbar-item" href="/catches/1"><i class="fas fa-comments">&nbsp;</i>Feed</a>
             <a class="navbar-item" href="/resources"><i class="fas fa-exchange-alt">&nbsp;</i>Links</a>
-            <% if(currentUser && currentUser.isAdmin){ %>
-              <a class="navbar-item" href="/admin"><i class="fas fa-user-shield">&nbsp;</i>Admin</a>
-            <% } %>
-             </div>         <div class="navbar-end">
+              <% if(currentUser && currentUser.isAdmin){ %>
+                <a class="navbar-item" href="/admin"><i class="fas fa-user-shield">&nbsp;</i>Admin</a>
+              <% } %>
+              </div>         
+              <div class="navbar-end">
                <% if(currentUser){ %>
-                 <a class="navbar-item" href="/dashboard"><i class="fas fa-user-circle">&nbsp;</i>Hello, <%= currentUser.username %>!</a>
-                 <a class="navbar-item" href="/dashboard"><i class="fas fa-cogs">&nbsp;</i>Settings</a>
-                 <a class="navbar-item" href="/logout"><i class="fas fa-sign-out-alt">&nbsp;</i>Logout</a>
-                <% } else { }%>
-        </div>
+                 <a class="navbar-item" href="/user/dashboard"><i class="fas fa-user-circle">&nbsp;</i>Hello, <%= currentUser.username %>!</a>
+                 <a class="navbar-item" href="/user/dashboard"><i class="fas fa-cogs">&nbsp;</i>Settings</a>
+                 <a class="navbar-item" href="/user/logout"><i class="fas fa-sign-out-alt">&nbsp;</i>Logout</a>
+                <% } %>
+              </div>
        </div>
       </div>
     </nav>

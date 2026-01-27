@@ -2,11 +2,11 @@
 <html>
 <head>
     <title>Change Email - fishingBakersfield</title>
-<%- include('partials/header') %>
-<%- include('partials/loginbar') %>
+<%- include('../partials/header') %>
+<%- include('../partials/loginbar') %>
 <div class="container">
-<%- include('partials/message') %>
-<a class="button" href="/dashboard"><i class="fa fa-arrow-left">&nbsp;</i>Dashboard</a>
+<%- include('../partials/message') %>
+<a class="button" href="/user/dashboard"><i class="fa fa-arrow-left">&nbsp;</i>Dashboard</a>
 <br>
 <br>
         <article class="message is-info">
@@ -20,7 +20,7 @@
 
 
 
-    <form action="/update/user/email?_method=PUT" method="POST">
+    <form action="/user/email?_method=PUT" method="POST">
         <div class="field">
           <label class="label">Current Email</label>
               <div class="control">
@@ -43,4 +43,4 @@
     
     
 </div>
-<%- include('partials/footer') %>
+<%- include('../partials/footer') %>

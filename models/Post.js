@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
 
-const catchSchema = mongoose.Schema({
+const postSchema = mongoose.Schema({
     species: String,
     weight: String,
     image: String,
-    catchlocation: String,
-    catchlocationid: String,
+    location: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Location'
+    },
     description: String,
-    timePosted: { type: Date, default: Date.now },
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
@@ -15,8 +16,8 @@ const catchSchema = mongoose.Schema({
         },
         username: String
     }
-},
-   {timestamps: true}
-);
+}, {
+    timestamps: true
+});
 
-module.exports = mongoose.model('Catch', catchSchema);
+module.exports = mongoose.model('Post', postSchema);
