@@ -129,18 +129,19 @@ app.get('/catches/:page', async (req, res) => {
 
         const posts = await Post.find({}).sort({'_id': -1}).skip((perPage * page) - perPage).limit(perPage);
 
-        return res.render('catch123', {posts: posts, current: page, pages: Math.ceil(posts.length/perPage)});
+        return res.render('posts/list', {posts: posts, current: page, pages: Math.ceil(posts.length/perPage)});
     } catch (error) {
         req.flash('error', error.toString());
         return res.location(req.get('Referrer') || '/');
     }
 });
 
+// GET - Add Location
 app.get('/locations/add', isLoggedIn, async (req, res) => {
-    res.render('newlocation');
+    res.render('locations/add');
 });
 
-// Add location logic
+// POST - Add location
 app.post('/locations', isLoggedIn, async (req, res) => {
     try {
         const { name, gps, image, description, thumbnail } = req.body;
@@ -152,11 +153,11 @@ app.post('/locations', isLoggedIn, async (req, res) => {
     }
 });
 
-// Edit location
+// GET - Edit Location
 app.get('/locations/:id/edit', isLoggedIn, async (req, res) => {
     try {
         const location = await Location.findOne({ '_id': req.params.id });
-        return res.render('editlocation', { location });
+        return res.render('locations/edit', { location });
     } catch (error) {
         req.flash('error', error.toString());
         return res.location(req.get('Referrer') || '/');
@@ -164,7 +165,7 @@ app.get('/locations/:id/edit', isLoggedIn, async (req, res) => {
 });
 
 
-// Update location
+// PUT - Edit Location
 app.put('/locations/:id', isLoggedIn, async (req, res) => {
     try {
         const { name, gps, image, description, thumbnail } = req.body;
@@ -176,7 +177,7 @@ app.put('/locations/:id', isLoggedIn, async (req, res) => {
     }
 });
 
-// Delete Location
+// DELETE - Delete Location
 app.delete('/locations/:id', async (req, res) => {
     try {
         await Location.findOneAndDelete({'_id': req.params.id});
@@ -218,7 +219,7 @@ app.get('/locations/:id/catches', async (req, res) => {
 app.get('/locations/:id/catch/:catchid/edit', async (req, res) => {
     try {
         const post = await Post.findOne({ '_id': req.params.catchid });
-        return res.render('editcatch', { post });
+        return res.render('posts/edit', { post });
     } catch (error) {
         req.flash('error', error.toString());
         return res.location(req.get('Referrer') || '/'); 
@@ -262,12 +263,12 @@ app.delete('/locations/:id/catch/:catchid', async (req, res) => {
     }
 });
 
-// Register an account FORM
+// GET - Register
 app.get('/register', (req, res) => {
-    return res.render("register");
+    return res.render('general/register');
 });
 
-// Register Logic
+// POST - Register
 app.post('/register', usernameToLowerCase, async (req, res) => {
     try {
         await User.register(new User({ username: req.body.username, email: req.body.email }), req.body.password);
@@ -293,17 +294,17 @@ app.get('/admin', isAdmin, async (req, res) => {
     }
 });
 
-// Terms
+// GET - Terms
 app.get('/terms', async (req, res) => {
-	return res.render('terms');
+	return res.render('general/terms');
 });
 
-// Login FORM ONLY
+// GET - Login
 app.get('/login', async (req, res) => {
-    return res.render('login');
+    return res.render('general/login');
 });
 
-// Login Logic (NOT FORM)
+// POST - Login
 app.post('/login', usernameToLowerCase, passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/login",
@@ -331,7 +332,7 @@ app.post('/login', usernameToLowerCase, passport.authenticate("local", {
 app.get('/locations/:id/catch/new', isLoggedIn, async (req, res) => {
     try {
         const location = await Location.findOne({ '_id': req.params.id });
-        return res.render('newcatch', { location });
+        return res.render('posts/add', { location });
     } catch (error) {
         req.flash('error', error.toString());
         return res.location(req.get('Referrer') || '/');
@@ -377,10 +378,10 @@ app.post('/locations/:id/catch', isLoggedIn, function(req, res){
 
 // Resources
 app.get('/resources', async (req, res) => {
-	res.render('resources');
+	res.render('general/resources');
 });
 
-// Delete User
+// DELETE - Delete User
 app.delete('/users/:userId', isAdmin, async (req, res) => {
     try {
         await User.findOneAndDelete({_id: req.params.userId});
@@ -394,7 +395,7 @@ app.delete('/users/:userId', isAdmin, async (req, res) => {
 
 // 404 Page - Must be last
 app.get('*', async (req, res) => {
-    res.render('notfound');
+    res.render('general/page-not-found');
 });
 
 app.set('port', (process.env.PORT || 5000));
