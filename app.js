@@ -398,8 +398,6 @@ app.get('*', async (req, res) => {
     res.render('general/page-not-found');
 });
 
-app.set('port', (process.env.PORT || 5000));
-
-app.listen(5000, function(){
+app.listen(process.env.PORT, () => {
    console.log(`Fishing Information is now running on ${process.env.PORT}!`);
 });
