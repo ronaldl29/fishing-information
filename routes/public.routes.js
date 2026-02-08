@@ -8,6 +8,18 @@ router.get('/', async (req, res) => {
     } catch (error) {
         console.log(error);
         req.flash('error', error.toString()); 
-        res.location(req.get("Referrer") || "/");
+        res.location(req.get('Referrer') || '/');
+    }
+});
+
+
+// GET - Terms of Use
+app.get('/terms', async (req, res) => {
+    try {
+	    return res.render('general/terms');
+    } catch (error) {
+        console.log(error);
+        req.flash('error', error.toString()); 
+        res.location(req.get('Referrer') || '/');
     }
 });
