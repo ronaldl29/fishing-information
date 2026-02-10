@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 
 
 // GET - Terms of Use
-app.get('/terms', async (req, res) => {
+router.get('/terms', async (req, res) => {
     try {
 	    return res.render('general/terms');
     } catch (error) {
