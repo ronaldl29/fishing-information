@@ -1,13 +1,18 @@
 const express = require('express');
 const router = express.Router();
+const { isAdmin } = require('../middleware.js');
+const User = require('../models/User');
 
-// Admin Panel
-router.get('/admin', async (req, res) => {
+// GET - Admin Panel
+router.get('/', isAdmin, async (req, res) => {
     try {
-        res.render('admin/dashboard');
+        const users = await User.find({});
+        res.render('admin/dashboard', { users });
     } catch (error) {
         console.log(error);
         req.flash('error', error.toString()); 
         res.location(req.get("Referrer") || "/");
     }
 });
+
+module.exports = router;

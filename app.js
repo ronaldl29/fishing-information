@@ -16,6 +16,10 @@ const { usernameToLowerCase, isLoggedIn, isAdmin } = require('./middleware');
 const Post = require('./models/Post');
 const Location = require('./models/Location');
 const User = require('./models/User');
+const generalRoutes = require('./routes/general.routes.js');
+const adminRoutes = require('./routes/admin.routes.js');
+const locationRoutes = require('./routes/locations.routes.js');
+const userRoutes = require('./routes/user.routes.js');
 
 // Security
 app.use(mongoSanitize()); 
@@ -71,19 +75,10 @@ app.use(function(req, res, next){
    next();
 });
 
-// Home
-app.get('/', (req, res) => {
-  res.redirect("/locations");
-});
-
-app.get('/locations', async (req, res) => {
-    try {
-        const allLocations = await Location.find();
-        res.render('locations/list', {location: allLocations});
-    } catch (err) {
-        res.send('Oops we hit a snag.');
-    }
-});
+app.use('/', generalRoutes);
+app.use('/admin', adminRoutes);
+app.use('/locations', locationRoutes);
+app.use('/user', userRoutes);
 
 // Location Selector
 app.get('/addcatch', async (req, res) => {
@@ -100,27 +95,6 @@ app.get('/catches', async (req, res) => {
     return res.redirect('/catches/1');
 });
 
-// User Dashboard
-app.get('/user/dashboard', isLoggedIn, async (req, res) => {
-    return res.render('user/dashboard');
-});
-
-// Update Email
-app.get('/user/email', isLoggedIn, async (req, res) => {
-    return res.render('user/update-email');
-});
-
-app.put('/email', isLoggedIn, async (req, res) => {
-    try {
-        await User.findOneAndUpdate({'_id': req.user._id}, { 'email': req.body.updatedEmailAdd });
-        req.flash('success', 'Your email address was successfully updated.');
-        return res.location(req.get('Referrer') || '/');
-    } catch (error) {
-        req.flash('error', error.toString());
-        return res.location(req.get('Referrer') || '/');
-    }
-});
-
 // Feed Page
 app.get('/catches/:page', async (req, res) => {
     try {
@@ -130,23 +104,6 @@ app.get('/catches/:page', async (req, res) => {
         const posts = await Post.find({}).sort({'_id': -1}).skip((perPage * page) - perPage).limit(perPage);
 
         return res.render('posts/list', {posts: posts, current: page, pages: Math.ceil(posts.length/perPage)});
-    } catch (error) {
-        req.flash('error', error.toString());
-        return res.location(req.get('Referrer') || '/');
-    }
-});
-
-// GET - Add Location
-app.get('/locations/add', isLoggedIn, async (req, res) => {
-    res.render('locations/add');
-});
-
-// POST - Add location
-app.post('/locations', isLoggedIn, async (req, res) => {
-    try {
-        const { name, gps, image, description, thumbnail } = req.body;
-        const location = await Location.create({ name, gps, image, description, thumbnail });
-        return res.redirect(`/locations/${location._id}`);
     } catch (error) {
         req.flash('error', error.toString());
         return res.location(req.get('Referrer') || '/');
@@ -263,71 +220,6 @@ app.delete('/locations/:id/catch/:catchid', async (req, res) => {
     }
 });
 
-// GET - Register
-app.get('/register', (req, res) => {
-    return res.render('general/register');
-});
-
-// POST - Register
-app.post('/register', usernameToLowerCase, async (req, res) => {
-    try {
-        await User.register(new User({ username: req.body.username, email: req.body.email }), req.body.password);
-        passport.authenticate('local');
-        req.flash('success', 'Welcome to Fishing Information!');
-        return res.redirect('/locations');
-    } catch (error) {
-        req.flash('error', error.toString());
-        return res.location(req.get('Referrer') || '/');
-    }
-});
-
-
-// Admin Panel
-app.get('/admin', isAdmin, async (req, res) => {
-    try {
-        const users = await User.find({});
-        return res.render('admin/dashboard', { users });
-    } catch (err) {
-        console.log(err);
-        req.flash('error', err.toString());
-        return res.location(req.get('Referrer') || '/');
-    }
-});
-
-// GET - Terms
-app.get('/terms', async (req, res) => {
-	return res.render('general/terms');
-});
-
-// GET - Login
-app.get('/login', async (req, res) => {
-    return res.render('general/login');
-});
-
-// POST - Login
-app.post('/login', usernameToLowerCase, passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/login",
-    failureFlash: true
-    }),
-    function(req, res){
- });
-
- // Logout
- app.get('/user/logout', async (req, res) => {
-    try {
-        req.logout(req.user, error => {
-            if(error) return next(error);
-                req.flash('success', 'You have been logged out!');
-                res.redirect('/');
-        });
-    } catch (error) {
-        console.log(error)
-        req.flash('error', error.toString());
-        return res.location(req.get('Referrer') || '/');
-    }
- });
-
 // New Catch FORM ONLY
 app.get('/locations/:id/catch/new', isLoggedIn, async (req, res) => {
     try {
@@ -374,11 +266,6 @@ app.post('/locations/:id/catch', isLoggedIn, function(req, res){
             });
         }
     });
-});
-
-// Resources
-app.get('/resources', async (req, res) => {
-	res.render('general/resources');
 });
 
 // DELETE - Delete User

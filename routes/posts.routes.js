@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-// Admin Panel
+// GET - Posts
 router.get('/', async (req, res) => {
     try {
 
@@ -11,3 +11,5 @@ router.get('/', async (req, res) => {
         res.location(req.get("Referrer") || "/");
     }
 });
+
+module.exports = router;
