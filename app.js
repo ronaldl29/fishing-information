@@ -158,20 +158,6 @@ app.get('/locations/:id', async (req, res) => {
     }
 });
 
-// Location Catches
-app.get('/locations/:id/catches', async (req, res) => {
-    try {
-        const perPage = 8;
-        const page = req.params.page || 1;
-
-        const posts = await Post.find({ 'catchlocationid': req.params.id }).sort({ '_id': -1 }).skip((perPage * page) - perPage).limit(perPage);
-        return res.render('locationcatches', { posts: posts, current: page, pages: Math.ceil(posts.length/perPage)});
-    } catch (error) {
-        req.flash('error', error.toString());
-        return res.location(req.get('Referrer') || '/');
-    }
-});
-
 // Edit a catch
 app.get('/locations/:id/catch/:catchid/edit', async (req, res) => {
     try {
