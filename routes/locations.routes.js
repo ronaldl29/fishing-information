@@ -64,4 +64,16 @@ router.get('/locations/:id/catches', async (req, res) => {
     }
 });
 
+// DELETE - Delete Location By ID
+router.delete('/locations/:id', async (req, res) => {
+    try {
+        await Location.findOneAndDelete({'_id': req.params.id});
+        req.flash('success', 'Location successfully deleted.');
+        return res.redirect('/locations');
+    } catch (error) {
+        req.flash('error', error.toString());
+        return res.location(req.get('Referrer') || '/');
+    }
+});
+
 module.exports = router;

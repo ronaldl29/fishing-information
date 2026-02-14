@@ -134,18 +134,6 @@ app.put('/locations/:id', isLoggedIn, async (req, res) => {
     }
 });
 
-// DELETE - Delete Location
-app.delete('/locations/:id', async (req, res) => {
-    try {
-        await Location.findOneAndDelete({'_id': req.params.id});
-        req.flash('success', 'Location successfully deleted.');
-        return res.redirect('/locations');
-    } catch (error) {
-        req.flash('error', error.toString());
-        return res.location(req.get('Referrer') || '/');
-    }
-});
-
 // Location Page
 app.get('/locations/:id', async (req, res) => {
     try {
