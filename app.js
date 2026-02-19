@@ -134,18 +134,6 @@ app.put('/locations/:id', isLoggedIn, async (req, res) => {
     }
 });
 
-// Location Page
-app.get('/locations/:id', async (req, res) => {
-    try {
-        const location = await Location.findOne({ '_id': req.params.id }).populate('posts').sort({ '_id': -1 });
-        return res.render('locations/view', { location });
-    } catch (err) {
-        console.log(err)
-        req.flash('error', err.toString());
-        return res.location(req.get('Referrer') || '/');
-    }
-});
-
 // Edit a catch
 app.get('/locations/:id/catch/:catchid/edit', async (req, res) => {
     try {
