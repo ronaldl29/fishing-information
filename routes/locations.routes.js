@@ -50,20 +50,6 @@ router.post('/', isLoggedIn, async (req, res) => {
     }
 });
 
-// GET - Location Catches by Location ID
-router.get('/locations/:id/catches', async (req, res) => {
-    try {
-        const perPage = 8;
-        const page = req.params.page || 1;
-
-        const posts = await Post.find({ 'catchlocationid': req.params.id }).sort({ '_id': -1 }).skip((perPage * page) - perPage).limit(perPage);
-        return res.render('locationcatches', { posts: posts, current: page, pages: Math.ceil(posts.length/perPage)});
-    } catch (error) {
-        req.flash('error', error.toString());
-        return res.location(req.get('Referrer') || '/');
-    }
-});
-
 // DELETE - Delete Location By ID
 router.delete('/locations/:id', async (req, res) => {
     try {

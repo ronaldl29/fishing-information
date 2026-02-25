@@ -5,10 +5,10 @@
 <html>
   <head>
     <title>Fish Caught At <%= posts[0].catchlocation %></title>
-    <%- include('partials/header') %>
-    <%- include('partials/loginbar') %>
+    <%- include('../partials/header') %>
+    <%- include('../partials/loginbar') %>
       <div class="container">
-        <%- include('partials/message') %>
+        <%- include('../partials/message') %>
         <a class="button" href="/locations/<%= posts[0].catchlocationid %>">
           <img src="/icons/arrow-left.svg" class="svg-icon-small"><%= posts[0].catchlocation %>
         </a>
@@ -96,12 +96,12 @@
         <% if (pages > 0) { %>
           <nav class="pagination" role="navigation" aria-label="pagination">
             <% if (Number(current) - 1 > 0) { %>
-              <a class="pagination-previous" href="/locations/<%= post[0].catchlocationid %>/catches/<%= Number(current) - 1 %>"><img src="/icons/circle-arrow-left.svg" class="svg-icon-small">Previous</a>
+              <a class="pagination-previous" href="/locations/<%= posts[0].catchlocationid %>/catches/<%= Number(current) - 1 %>"><img src="/icons/circle-arrow-left.svg" class="svg-icon-small">Previous</a>
             <% } else { %>
 	             <a class="pagination-previous" disabled><img src="/icons/circle-arrow-left.svg" class="svg-icon-small">Previous</a>
 	          <% } %>
 	           <% if (Number(current) + 1 <= pages) { %>
-               <a href="/locations/<%= posts[0].catchlocationid %>/catches/<%= Number(current) + 1 %>" class="pagination-next"<img src="/icons/circle-arrow-right.svg" class="svg-icon-small">Next page</a>
+               <a href="/locations/<%= posts[0].catchlocationid %>/catches/<%= Number(current) + 1 %>" class="pagination-next"><img src="/icons/circle-arrow-right.svg" class="svg-icon-small">Next page</a>
             <% } else { %>
                <a class="pagination-next" disabled><img src="/icons/circle-arrow-right.svg" class="svg-icon-small">Next page</a>
 	          <% } %>
@@ -140,5 +140,5 @@
           </nav>
       <% } %>
     </div>
-  <%- include('partials/footer') %>
+  <%- include('../partials/footer') %>
 <% } %>

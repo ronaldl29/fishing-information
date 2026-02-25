@@ -19,6 +19,7 @@ const User = require('./models/User');
 const generalRoutes = require('./routes/general.routes.js');
 const adminRoutes = require('./routes/admin.routes.js');
 const locationRoutes = require('./routes/locations.routes.js');
+const postRoutes = require('./routes/posts.routes.js');
 const userRoutes = require('./routes/user.routes.js');
 
 // Security
@@ -91,6 +92,7 @@ app.use(function(req, res, next){
 });
 
 app.use('/', generalRoutes);
+app.use('/', postRoutes);
 app.use('/admin', adminRoutes);
 app.use('/locations', locationRoutes);
 app.use('/user', userRoutes);
