@@ -60,11 +60,26 @@ const storage = multer.diskStorage({
 		callback(null, './public/uploads')
 	},
 	filename: function(req, file, callback) {
-		console.log(file)
 		callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
 	}
 });
-const upload = multer({ storage : storage}).single('image');
+
+const fileFilter = function(req, file, callback) {
+	const allowedTypes = /jpeg|jpg|png|gif|webp/;
+	const ext = allowedTypes.test(path.extname(file.originalname).toLowerCase());
+	const mime = allowedTypes.test(file.mimetype);
+	if (ext && mime) {
+		callback(null, true);
+	} else {
+		callback(new Error('Only image files (jpeg, jpg, png, gif, webp) are allowed'));
+	}
+};
+
+const upload = multer({
+	storage,
+	limits: { fileSize: 5 * 1024 * 1024 },
+	fileFilter
+}).single('image');
 
 
 // Add user data globally
