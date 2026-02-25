@@ -223,11 +223,11 @@ app.post('/locations/:id/catch', isLoggedIn, async (req, res) => {
             upload(req, res, (err) => (err ? reject(err) : resolve()));
         });
 
-        const { catchlocation, catchlocationid, species, weight, description } = req.body;
+        const { species, weight, description } = req.body;
         const image = '/uploads/' + req.file.filename;
 
         const post = await Post.create({
-            species, image, weight, description, catchlocation, catchlocationid,
+            species, image, weight, description,
             location: req.params.id
         });
 

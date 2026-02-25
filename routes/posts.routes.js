@@ -19,8 +19,8 @@ router.get('/locations/:id/catches/:page?', async (req, res) => {
         const perPage = 8;
         const page = req.params.page || 1;
 
-        const totalPosts = await Post.countDocuments({ catchlocationid: req.params.id });
-        const posts = await Post.find({ catchlocationid: req.params.id })
+        const totalPosts = await Post.countDocuments({ location: req.params.id });
+        const posts = await Post.find({ location: req.params.id })
             .sort({ _id: -1 })
             .skip((perPage * page) - perPage)
             .limit(perPage);
