@@ -205,15 +205,15 @@
                         <p style="color: black"><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"> Yesterday</p>
                       <% } %>
                       <% if(dateDiff(location.posts[1].createdAt, currentDate) > 1){ %>
-                        <p style="color: black;"><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"><%= dateDiff(location.catches[1].createdAt, currentDate) %> days ago</p>
+                        <p style="color: black;"><img src="/icons/calendar.svg" style="margin-right: 2px;" class="svg-icon-small"><%= dateDiff(location.posts[1].createdAt, currentDate) %> days ago</p>
                       <% } %>
                       <div>
-                        <% if(currentUser && location.catches[1].author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
+                        <% if(currentUser && location.posts[1].author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
                           <div style="text-align: center">
-                            <a class="button is-small is-warning" href="/locations/<%= location._id %>/catch/<%= location.catches[1]._id %>/edit">
+                            <a class="button is-small is-warning" href="/locations/<%= location._id %>/catch/<%= location.posts[1]._id %>/edit">
                               Edit
                             </a>
-                            <form class="sameLine" action="/locations/<%= location._id %>/catch/<%= location.catches[1]._id %>?_method=DELETE" method="POST">
+                            <form class="sameLine" action="/locations/<%= location._id %>/catch/<%= location.posts[1]._id %>?_method=DELETE" method="POST">
                               <button class="button is-small is-danger">
                                 Delete
                               </button>
