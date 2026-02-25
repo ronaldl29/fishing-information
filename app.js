@@ -209,40 +209,39 @@ app.get('/locations/:id/catch/new', isLoggedIn, async (req, res) => {
 });
 
 // Catch Post LOGIC
-app.post('/locations/:id/catch', isLoggedIn, function(req, res){
-    Location.findById(req.params.id, function(err, location){
-        if(err){
-            console.log(err);
-            res.redirect('/locations');
-        } else {
-            upload(req, res, function(err){
-                if(err){
-                    return res.end('Upload unsuccessful');
-                }
-        var catchlocation = req.body.catchlocation;
-        var catchlocationid = req.body.catchlocationid;
-        var species = req.body.species;
-        var image = '/uploads/' + req.file.filename;
-        var weight = req.body.weight;
-        var description = req.body.description;
-        var addCatch = {species: species, image: image, weight: weight, description: description, catchlocation: catchlocation, catchlocationid: catchlocationid};
-
-        Post.create(addCatch, function(err, post){
-            if(err){
-                res.redirect('/locations/:id/catch/new');
-            } else {
-                post.author.id = req.user._id;
-                post.author.username = req.user.username;
-                post.save();
-                location.catches.push(post);
-                location.save();
-                req.flash('success', 'Your catch has been added. Thank you!');
-                res.redirect('/locations/' + location._id + '/catches/');
-            }
-        });
-            });
+app.post('/locations/:id/catch', isLoggedIn, async (req, res) => {
+    try {
+        const location = await Location.findById(req.params.id);
+        if (!location) {
+            req.flash('error', 'Location not found');
+            return res.redirect('/locations');
         }
-    });
+
+        await new Promise((resolve, reject) => {
+            upload(req, res, (err) => (err ? reject(err) : resolve()));
+        });
+
+        const { catchlocation, catchlocationid, species, weight, description } = req.body;
+        const image = '/uploads/' + req.file.filename;
+
+        const post = await Post.create({
+            species, image, weight, description, catchlocation, catchlocationid
+        });
+
+        post.author.id = req.user._id;
+        post.author.username = req.user.username;
+        await post.save();
+
+        location.catches.push(post);
+        await location.save();
+
+        req.flash('success', 'Your catch has been added. Thank you!');
+        return res.redirect('/locations/' + location._id + '/catches/');
+    } catch (err) {
+        console.log(err);
+        req.flash('error', err.message || 'Something went wrong');
+        return res.redirect('/locations');
+    }
 });
 
 // DELETE - Delete User
