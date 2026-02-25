@@ -232,7 +232,7 @@ app.post('/locations/:id/catch', isLoggedIn, async (req, res) => {
         post.author.username = req.user.username;
         await post.save();
 
-        location.catches.push(post);
+        location.posts.push(post);
         await location.save();
 
         req.flash('success', 'Your catch has been added. Thank you!');
