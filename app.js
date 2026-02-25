@@ -236,7 +236,7 @@ app.post('/locations/:id/catch', isLoggedIn, async (req, res) => {
         await location.save();
 
         req.flash('success', 'Your catch has been added. Thank you!');
-        return res.redirect('/locations/' + location._id + '/catches/');
+        return res.redirect(`/locations/${location._id}`);
     } catch (err) {
         console.log(err);
         req.flash('error', err.message || 'Something went wrong');
