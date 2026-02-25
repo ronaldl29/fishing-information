@@ -227,7 +227,8 @@ app.post('/locations/:id/catch', isLoggedIn, async (req, res) => {
         const image = '/uploads/' + req.file.filename;
 
         const post = await Post.create({
-            species, image, weight, description, catchlocation, catchlocationid
+            species, image, weight, description, catchlocation, catchlocationid,
+            location: req.params.id
         });
 
         post.author.id = req.user._id;
